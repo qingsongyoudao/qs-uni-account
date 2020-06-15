@@ -1,6 +1,6 @@
 <template>
 	<view class="u-swiper-wrap" :style="{
-		borderRadius: `${borderRadius}rpx`,
+		borderRadius: `${borderRadius}rpx`
 	}">
 		<swiper @change="change" @animationfinish="animationfinish" :interval="interval" :circular="circular" :duration="duration" :autoplay="autoplay"
 		 :previous-margin="effect3d ? effect3dPreviousMargin + 'rpx' : '0'" :next-margin="effect3d ? effect3dPreviousMargin + 'rpx' : '0'"
@@ -11,7 +11,8 @@
 				<view class="u-list-image-wrap" :class="[current != index ? 'u-list-scale' : '']" :style="{
 						borderRadius: `${borderRadius}rpx`,
 						transform: effect3d && current != index ? 'scaleY(0.9)' : 'scaleY(1)',
-						margin: effect3d && current != index ? '0 20rpx' : 0
+						margin: effect3d && current != index ? '0 20rpx' : 0,
+						backgroundColor: bgColor
 					}">
 					<image class="u-swiper-image" :src="item[name]" :mode="imgMode"></image>
 					<view v-if="title" class="u-swiper-title u-line-1" :style="{
@@ -61,6 +62,7 @@
 	 * @property {Boolean} autoplay 是否自动播放（默认true）
 	 * @property {String Number} interval 自动轮播时间间隔，单位ms（默认2500）
 	 * @property {Boolean} circular 是否衔接播放，见官网说明（默认true）
+	 * @property {String} bg-color 背景颜色（默认#f3f4f6）
 	 * @property {String Number} border-radius 轮播图圆角值，单位rpx（默认8）
 	 * @property {Object} title-style 自定义标题样式
 	 * @property {String Number} effect3d-previous-margin mode = true模式的情况下，激活项与前后项之间的距离，单位rpx（默认50）
@@ -149,6 +151,17 @@
 			name: {
 				type: String,
 				default: 'image'
+			},
+			// 背景颜色
+			bgColor: {
+				type: String,
+				default: '#f3f4f6'
+			}
+		},
+		watch: {
+			// 如果外部的list发生变化，判断长度是否被修改，如果前后长度不一致，重置current值，避免溢出
+			list(nVal, oVal) {
+				if(nVal.length !== oVal.length) this.current = 0;
 			}
 		},
 		data() {

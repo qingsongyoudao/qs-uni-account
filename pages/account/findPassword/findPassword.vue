@@ -1,19 +1,21 @@
 <template>
-	<account-page :title="title">
-		<account-list-group>
-			<account-list-item title="通过邮箱找回密码" @click="openPage('findPassword/email-findPassword')"></account-list-item>
-			<account-list-item title="通过手机号找回密码" @click="openPage('findPassword/mobile-findPassword')"></account-list-item>
-		</account-list-group>
+	<account-page :title="title" :desc="desc">
+		<find-password></find-password>
 
 		<u-gap height="40"></u-gap>
 	</account-page>
 </template>
 
 <script>
+import findPassword from '@/components/account/find-password.vue';
 export default {
+	components: {
+		findPassword
+	},
 	data() {
 		return {
-			title: '找回密码'
+			title: '找回密码',
+			desc: ''
 		};
 	},
 	methods: {

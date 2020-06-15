@@ -106,7 +106,90 @@
 	}, {
 		"path": "pages/my/serviceOrder/serviceOrder",
 		"style": {}
-	}],
+	}, {
+		"path": "pages/account/updateMobile/updateMobile",
+		"style": {}
+	}    ,{
+            "path" : "pages/account/unbindMobile/unbindMobile",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/account/bindMobile/bindMobile",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/account/bindEmail/bindEmail",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/account/updateEmail/updateEmail",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/account/unbindEmail/unbindEmail",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/account/bindWeixin/bindWeixin",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/account/updateWeixin/updateWeixin",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/account/unbindWeixin/unbindWeixin",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/account/bindWeibo/bindWeibo",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/account/updateWeibo/updateWeibo",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/account/unbindWeibo/unbindWeibo",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/account/bindQq/bindQq",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/account/updateQq/updateQq",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/account/unbindQq/unbindQq",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/account/bindTaobao/bindTaobao",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/account/updateTaobao/updateTaobao",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/account/unbindTaobao/unbindTaobao",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/account/bindAlipay/bindAlipay",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/account/updateAlipay/updateAlipay",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/account/unbindAlipay/unbindAlipay",
+            "style" : {}
+        }
+    ],
 	"globalStyle": {
 		"pageOrientation": "portrait",
 		"navigationBarTextStyle": "black",

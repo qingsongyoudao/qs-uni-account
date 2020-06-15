@@ -1,19 +1,21 @@
 <template>
-	<account-page :title="title">
-		<account-list-group>
-			<account-list-item title="通过邮箱注册" @click="openPage('register/email-register')"></account-list-item>
-			<account-list-item title="通过手机号注册" @click="openPage('register/mobile-register')"></account-list-item>
-		</account-list-group>
+	<account-page :title="title" :desc="desc">
+		<register></register>
 
 		<u-gap height="40"></u-gap>
 	</account-page>
 </template>
 
 <script>
+import register from '@/components/account/register.vue';
 export default {
+	components: {
+		register
+	},
 	data() {
 		return {
-			title: '注册'
+			title: '注册',
+			desc: ''
 		};
 	},
 	methods: {

@@ -5,7 +5,11 @@
 </template>
 
 <script>
+import my from '@/components/my/my-mall.vue';
 export default {
+	components: {
+		my
+	},
 	data() {
 		return {};
 	},

@@ -21,7 +21,7 @@
 				width: width + 'rpx',
 				height: width + 'rpx'
 			}">
-				<u-icon name="plus" class="u-add-btn" size="40"></u-icon>
+				<u-icon name="plus" class="u-add-btn" size="40" @click="selectFile"></u-icon>
 				<view class="u-add-tips">{{uploadText}}</view>
 			</view>
 		</view>
@@ -334,7 +334,7 @@
 					formData: this.formData,
 					header: this.header,
 					success: (res) => {
-						if (res.statusCode != 200) {
+						if (![200,201].includes(res.statusCode)) {
 							this.uploadError(index, res.data);
 						} else {
 							// 上传成功
