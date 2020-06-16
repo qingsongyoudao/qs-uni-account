@@ -189,6 +189,10 @@
             "path" : "pages/account/unbindAlipay/unbindAlipay",
             "style" : {}
         }
+        ,{
+            "path" : "pages/category/category",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"pageOrientation": "portrait",
@@ -209,6 +213,11 @@
 			"iconPath": "static/tabbar/tabbar-home-gray.png",
 			"selectedIconPath": "static/tabbar/tabbar-home-red.png",
 			"text": "首页"
+		}, {
+			"pagePath": "pages/category/category",
+			"iconPath": "static/tabbar/tabbar-category-gray.png",
+			"selectedIconPath": "static/tabbar/tabbar-category-red.png",
+			"text": "分类"
 		}, {
 			"pagePath": "pages/find/find",
 			"iconPath": "static/tabbar/tabbar-find-gray.png",
