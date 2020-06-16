@@ -1,22 +1,22 @@
 <template>
-	<account-page :title="title">
-		<my-setting></my-setting>
+	<account-page :title="title" :desc="desc">
+		<list></list>
+		
+		<u-gap height="40"></u-gap>
 	</account-page>
 </template>
 
 <script>
+import list from '@/components/my/my-setting.vue';
 export default {
+	components: {
+		list
+	},
 	data() {
 		return {
-			title: '设置'
+			title: '设置',
+			desc: ''
 		};
-	},
-	methods: {
-		openPage(path) {
-			this.$u.route({
-				url: '/pages/' + path
-			});
-		}
 	}
 };
 </script>

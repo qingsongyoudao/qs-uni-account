@@ -1,16 +1,16 @@
 <template>
 	<account-page :title="title" :desc="desc">
-		<account-bind></account-bind>
+		<list></list>
 
 		<u-gap height="40"></u-gap>
 	</account-page>
 </template>
 
 <script>
-import accountBind from '@/components/account/account-bind.vue';
+import list from '@/components/account/account-bind.vue';
 export default {
 	components: {
-		accountBind
+		list
 	},
 	data() {
 		return {

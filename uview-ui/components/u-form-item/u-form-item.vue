@@ -12,7 +12,6 @@
 				<!-- 为了块对齐 -->
 				<view class="u-form-item--left__content">
 					<!-- nvue不支持伪元素before -->
-					<text v-if="isRequired" class="u-form-item--left__content--required">*</text>
 					<view class="u-form-item--left__content__icon" v-if="leftIcon">
 						<u-icon :name="leftIcon" :custom-style="leftIconStyle"></u-icon>
 					</view>

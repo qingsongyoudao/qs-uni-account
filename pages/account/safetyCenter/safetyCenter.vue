@@ -1,16 +1,16 @@
 <template>
 	<account-page :title="title" :desc="desc">
-		<safety-center></safety-center>
+		<list></list>
 
 		<u-gap height="40"></u-gap>
 	</account-page>
 </template>
 
 <script>
-import safetyCenter from '@/components/account/safety-center.vue';
+import list from '@/components/account/safety-center.vue';
 export default {
 	components: {
-		safetyCenter
+		list
 	},
 	data() {
 		return {

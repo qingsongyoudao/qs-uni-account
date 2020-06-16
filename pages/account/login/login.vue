@@ -1,16 +1,16 @@
 <template>
 	<account-page :title="title" :desc="desc">
-		<login></login>
+		<list></list>
 
 		<u-gap height="40"></u-gap>
 	</account-page>
 </template>
 
 <script>
-import login from '@/components/account/login.vue';
+import list from '@/components/account/login.vue';
 export default {
 	components: {
-		login
+		list
 	},
 	data() {
 		return {
