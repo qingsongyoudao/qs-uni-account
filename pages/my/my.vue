@@ -197,6 +197,9 @@ export default {
 	.user-panel-box {
 		background-color: #ffffff;
 		padding: 40rpx 32rpx 0 32rpx;
+		/*  #ifndef H5 */
+		padding-top: 130rpx;
+		/*  #endif  */
 	}
 
 	.user-card-box {
