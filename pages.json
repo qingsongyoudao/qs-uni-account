@@ -1,6 +1,5 @@
 {
 	"easycom": {
-		"uni-(.*)": "@/uni-ui/uni-$1/uni-$1.vue",
 		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue",
 		"qs-(.*)": "@/qs-ui/components/qs-$1/qs-$1.vue"
 	},

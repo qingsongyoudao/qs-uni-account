@@ -75,6 +75,7 @@
 			checkKeepRunning() {
 				// 获取上一次退出页面(H5还包括刷新)时的时间戳，如果没有上次的保存，此值可能为空
 				let lastTimestamp = Number(uni.getStorageSync(this.uniqueKey + '_$uCountDownTimestamp'));
+				if(!lastTimestamp) return this.changeEvent(this.startText);
 				// 当前秒的时间戳
 				let nowTimestamp = Math.floor((+ new Date()) / 1000);
 				// 判断当前的时间戳，是否小于上一次的本该按设定结束，却提前结束的时间戳
@@ -128,7 +129,7 @@
 			},
 			// 保存时间戳，为了防止倒计时尚未结束，H5刷新或者各端的右上角返回上一页再进来
 			setTimeToStorage() {
-				if(!this.keepRunning) return ;
+				if(!this.keepRunning || !this.timer) return;
 				// 记录当前的时间戳，为了下次进入页面，如果还在倒计时内的话，继续倒计时
 				// 倒计时尚未结束，结果大于0；倒计时已经开始，就会小于初始值，如果等于初始值，说明没有开始倒计时，无需处理
 				if(this.secNum > 0 && this.secNum <= this.seconds) {
@@ -144,9 +145,9 @@
 		},
 		// 组件销毁的时候，清除定时器，否则定时器会继续存在，系统不会自动清除
 		beforeDestroy() {
+			this.setTimeToStorage();
 			clearTimeout(this.timer);
 			this.timer = null;
-			this.setTimeToStorage();
 		}
 	}
 </script>
