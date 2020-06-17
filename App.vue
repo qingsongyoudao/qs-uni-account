@@ -19,14 +19,6 @@ export default {
 /* 引入 qs-ui 基础样式 */
 @import 'qs-ui/index.scss';
 
-/* 解决头条小程序组件内引入字体不生效的问题 */
-/* #ifdef MP-TOUTIAO */
-@font-face {
-	font-family: uniicons;
-	src: url('/static/uni.ttf');
-}
-/* #endif */
-
 /* H5的时候，隐藏滚动条 */
 /* #ifdef H5 */
 ::-webkit-scrollbar {

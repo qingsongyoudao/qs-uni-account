@@ -4,15 +4,15 @@
 		"qs-(.*)": "@/qs-ui/components/qs-$1/qs-$1.vue"
 	},
 	"pages": [{
-		"path": "pages/index/index",
-		"style": {}
-	}, {
 		"path": "pages/my/my",
 		"style": {
 			"navigationStyle": "custom"
 		}
 	}, {
-		"path": "pages/find/find",
+		"path": "pages/my/user/user",
+		"style": {}
+	}, {
+		"path": "pages/my/setting/setting",
 		"style": {}
 	}, {
 		"path": "pages/account/login/login",
@@ -72,129 +72,69 @@
 		"path": "pages/account/accountDestroy/accountDestroy",
 		"style": {}
 	}, {
-		"path": "pages/my/setting/setting",
-		"style": {}
-	}, {
-		"path": "pages/my/trace/product",
-		"style": {}
-	}, {
-		"path": "pages/my/trace/brand",
-		"style": {}
-	}, {
-		"path": "pages/my/trace/activity",
-		"style": {}
-	}, {
-		"path": "pages/my/trace/history",
-		"style": {}
-	}, {
-		"path": "pages/my/order/order",
-		"style": {}
-	}, {
-		"path": "pages/my/wallet/wallet",
-		"style": {}
-	}, {
-		"path": "pages/my/wallet/money",
-		"style": {}
-	}, {
-		"path": "pages/my/wallet/redPacket",
-		"style": {}
-	}, {
-		"path": "pages/my/wallet/coupon",
-		"style": {}
-	}, {
-		"path": "pages/my/wallet/integral",
-		"style": {}
-	}, {
-		"path": "pages/my/serviceOrder/serviceOrder",
-		"style": {}
-	}, {
 		"path": "pages/account/updateMobile/updateMobile",
 		"style": {}
-	}    ,{
-            "path" : "pages/account/unbindMobile/unbindMobile",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/account/bindMobile/bindMobile",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/account/bindEmail/bindEmail",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/account/updateEmail/updateEmail",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/account/unbindEmail/unbindEmail",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/account/bindWeixin/bindWeixin",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/account/updateWeixin/updateWeixin",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/account/unbindWeixin/unbindWeixin",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/account/bindWeibo/bindWeibo",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/account/updateWeibo/updateWeibo",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/account/unbindWeibo/unbindWeibo",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/account/bindQq/bindQq",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/account/updateQq/updateQq",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/account/unbindQq/unbindQq",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/account/bindTaobao/bindTaobao",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/account/updateTaobao/updateTaobao",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/account/unbindTaobao/unbindTaobao",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/account/bindAlipay/bindAlipay",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/account/updateAlipay/updateAlipay",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/account/unbindAlipay/unbindAlipay",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/my/user/user",
-            "style" : {}
-        }
-    ],
+	}, {
+		"path": "pages/account/unbindMobile/unbindMobile",
+		"style": {}
+	}, {
+		"path": "pages/account/bindMobile/bindMobile",
+		"style": {}
+	}, {
+		"path": "pages/account/bindEmail/bindEmail",
+		"style": {}
+	}, {
+		"path": "pages/account/updateEmail/updateEmail",
+		"style": {}
+	}, {
+		"path": "pages/account/unbindEmail/unbindEmail",
+		"style": {}
+	}, {
+		"path": "pages/account/bindWeixin/bindWeixin",
+		"style": {}
+	}, {
+		"path": "pages/account/updateWeixin/updateWeixin",
+		"style": {}
+	}, {
+		"path": "pages/account/unbindWeixin/unbindWeixin",
+		"style": {}
+	}, {
+		"path": "pages/account/bindWeibo/bindWeibo",
+		"style": {}
+	}, {
+		"path": "pages/account/updateWeibo/updateWeibo",
+		"style": {}
+	}, {
+		"path": "pages/account/unbindWeibo/unbindWeibo",
+		"style": {}
+	}, {
+		"path": "pages/account/bindQq/bindQq",
+		"style": {}
+	}, {
+		"path": "pages/account/updateQq/updateQq",
+		"style": {}
+	}, {
+		"path": "pages/account/unbindQq/unbindQq",
+		"style": {}
+	}, {
+		"path": "pages/account/bindTaobao/bindTaobao",
+		"style": {}
+	}, {
+		"path": "pages/account/updateTaobao/updateTaobao",
+		"style": {}
+	}, {
+		"path": "pages/account/unbindTaobao/unbindTaobao",
+		"style": {}
+	}, {
+		"path": "pages/account/bindAlipay/bindAlipay",
+		"style": {}
+	}, {
+		"path": "pages/account/updateAlipay/updateAlipay",
+		"style": {}
+	}, {
+		"path": "pages/account/unbindAlipay/unbindAlipay",
+		"style": {}
+	}],
 	"globalStyle": {
 		"pageOrientation": "portrait",
 		"navigationBarTextStyle": "black",
@@ -210,16 +150,6 @@
 		"backgroundColor": "#FFFFFF",
 		"borderStyle": "white",
 		"list": [{
-			"pagePath": "pages/index/index",
-			"iconPath": "static/tabbar/tabbar-home-gray.png",
-			"selectedIconPath": "static/tabbar/tabbar-home-red.png",
-			"text": "首页"
-		}, {
-			"pagePath": "pages/find/find",
-			"iconPath": "static/tabbar/tabbar-find-gray.png",
-			"selectedIconPath": "static/tabbar/tabbar-find-red.png",
-			"text": "发现"
-		}, {
 			"pagePath": "pages/my/my",
 			"iconPath": "static/tabbar/tabbar-my-gray.png",
 			"selectedIconPath": "static/tabbar/tabbar-my-red.png",
