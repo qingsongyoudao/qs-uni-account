@@ -58,9 +58,9 @@ export default {
 						trigger: ['change', 'blur']
 					},
 					{
-						min: 4,
+						min: 6,
 						max: 20,
-						message: '密码长度在4到20个字符',
+						message: '密码长度在6到20个字符',
 						trigger: ['change','blur']
 					},
 					{
@@ -84,7 +84,16 @@ export default {
 		submit() {
 			this.$refs.uForm.validate(valid => {
 				if (valid) {
-					return this.$u.toast('验证通过');
+					if (this.model.user == 'admin' && this.model.password == '888888') {
+						this.$u.vuex('vuex_user.hasLogin', true);
+						this.$u.vuex('vuex_user.userId', '100001');
+						this.$u.vuex('vuex_user.userName', '青松有道');
+						this.$u.vuex('vuex_user.userFace', 'http://pic2.sc.chinaz.com/Files/pic/pic9/202002/hpic2119_s.jpg');
+						uni.navigateBack();
+						console.log('登录成功');
+					} else {
+						return this.$u.toast('账号或密码不对');
+					}
 				} else {
 					console.log('验证失败');
 				}

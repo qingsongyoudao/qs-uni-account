@@ -3,13 +3,13 @@
 		<!-- 用户 -->
 		<view v-if="userMode == 'panel'" class="user-panel-box">
 			<!-- 未登录 -->
-			<view v-if="logined == false" class="u-flex" @click="openPage('account/login/pwd-login')">
+			<view v-if="!vuex_user.hasLogin" class="u-flex" @click="openPage('account/login/pwd-login')">
 				<view class="u-m-r-20"><u-avatar size="120"></u-avatar></view>
 				<view class="u-flex-1"><view class="u-font-lg">登录 / 注册</view></view>
 				<view><u-icon name="arrow-right" color="#969799" size="28"></u-icon></view>
 			</view>
 			<!-- 已登录 -->
-			<view v-if="logined == true" class="u-flex" @click="openPage('account/login/login')">
+			<view v-if="vuex_user.hasLogin" class="u-flex" @click="openPage('my/user/user')">
 				<view class="u-m-r-20"><u-avatar :src="list.model.user.userFace" mode="circle" size="120"></u-avatar></view>
 				<view class="u-flex-1">
 					<view class="u-font-lg">{{ list.model.user.nickName }}</view>
@@ -23,13 +23,13 @@
 		<u-gap v-if="userMode == 'card'" height="20"></u-gap>
 		<view v-if="userMode == 'card'" class="user-card-box">
 			<!-- 未登录 -->
-			<view v-if="logined == false" class="u-flex" @click="openPage('account/login/pwd-login')">
+			<view v-if="!vuex_user.hasLogin" class="u-flex" @click="openPage('account/login/pwd-login')">
 				<view class="u-m-r-20"><u-avatar size="120"></u-avatar></view>
 				<view class="u-flex-1"><view class="u-font-lg">登录 / 注册</view></view>
 				<view><u-icon name="arrow-right" color="#969799" size="28"></u-icon></view>
 			</view>
 			<!-- 已登录 -->
-			<view v-if="logined == true" class="u-flex" @click="openPage('account/login/login')">
+			<view v-if="vuex_user.hasLogin" class="u-flex" @click="openPage('my/user/user')">
 				<view class="u-m-r-20"><u-avatar :src="list.model.user.userFace" mode="circle" size="120"></u-avatar></view>
 				<view class="u-flex-1">
 					<view class="u-font-lg">{{ list.model.user.nickName }}</view>
@@ -246,11 +246,6 @@ export default {
 		mode: {
 			type: String,
 			default: 'card'
-		},
-		// 是否登录
-		logined: {
-			type: Boolean,
-			default: true
 		}
 	},
 	data() {
@@ -276,9 +271,9 @@ export default {
 				model: {
 					user: {
 						/* 图像 */
-						userFace: 'http://pic2.sc.chinaz.com/Files/pic/pic9/202002/hpic2119_s.jpg',
+						userFace: '',
 						/* 昵称 */
-						nickName: '青松有道',
+						nickName: '',
 						/* 标签 */
 						userTag: ['钻石会员', '达人']
 					},
@@ -311,6 +306,12 @@ export default {
 			this.$u.route({
 				url: '/pages/' + path
 			});
+		}
+	},
+	onLoad() {
+		if (this.vuex_user.hasLogin) {
+			this.list.model.user.nickName = this.vuex_user.userName;
+			this.list.model.user.userFace = this.vuex_user.userFace;
 		}
 	}
 };

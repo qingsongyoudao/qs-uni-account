@@ -16,7 +16,7 @@
 
 			<u-gap height="60"></u-gap>
 
-			<view class="btn-line"><u-button type="primary">退出登录</u-button></view>
+			<view class="btn-line"><u-button type="primary" @click="logout">退出登录</u-button></view>
 		</view>
 		<view v-if="mode == 'card'" class="card-box">
 			<view class="card-main">
@@ -34,7 +34,7 @@
 
 			<u-gap height="60"></u-gap>
 
-			<view class="btn-line"><u-button type="primary">退出登录</u-button></view>
+			<view class="btn-line"><u-button type="primary" @click="logout">退出登录</u-button></view>
 		</view>
 	</view>
 </template>
@@ -100,6 +100,14 @@ export default {
 			this.$u.route({
 				url: '/pages/' + path
 			});
+		},
+		logout() {
+			this.$u.vuex('vuex_user.hasLogin', false);
+			this.$u.vuex('vuex_user.userId', '');
+			this.$u.vuex('vuex_user.userName', '');
+			this.$u.vuex('vuex_user.userFace', '');
+			this.$u.toast('退出成功');
+			uni.navigateBack();
 		}
 	}
 };

@@ -192,6 +192,10 @@
             "path" : "pages/category/category",
             "style" : {}
         }
+        ,{
+            "path" : "pages/my/user/user",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"pageOrientation": "portrait",

@@ -17,6 +17,11 @@ export default {
 			title: '设置',
 			desc: ''
 		};
+	},
+	onLoad() {
+		if (!this.vuex_user.hasLogin) {
+			this.$u.route('/pages/account/login/pwd-login');
+		}
 	}
 };
 </script>
