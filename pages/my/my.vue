@@ -1,5 +1,13 @@
 <template>
 	<qs-page>
+		<qs-navbar>
+			<view class="u-flex u-m-l-22">
+				<u-icon name="setting" size="38" :custom-style="{'padding': '16rpx'}" @click="openPage('my/setting/setting')"></u-icon>
+			</view>
+			<view class="u-flex u-m-r-22">
+				<u-icon name="chat" size="38" :custom-style="{'padding': '16rpx'}" @click="tip"></u-icon>
+			</view>
+		</qs-navbar>
 		<view class="my-box">
 			<!-- 用户 -->
 			<view class="user-panel-box">
@@ -49,24 +57,14 @@
 			<!-- 订单 -->
 			<view class="panel-box">
 				<view class="panel-header">
-					<u-section title="我的订单" sub-title="查看全部订单" :bold="false"></u-section>
+					<u-section title="我的订单" sub-title="查看全部订单" :bold="false" :show-line="false"></u-section>
 				</view>
 				<u-grid :col="5" :border="false" class="panel-main">
-					<u-grid-item>
-						<u-icon name="order" label="待付款" size="48" label-size="22" margin-top="14" label-pos="bottom"></u-icon>
-					</u-grid-item>
-					<u-grid-item>
-						<u-icon name="order" label="待发货" size="48" label-size="22" margin-top="14" label-pos="bottom"></u-icon>
-					</u-grid-item>
-					<u-grid-item>
-						<u-icon name="order" label="待收货" size="48" label-size="22" margin-top="14" label-pos="bottom"></u-icon>
-					</u-grid-item>
-					<u-grid-item>
-						<u-icon name="order" label="待评价" size="48" label-size="22" margin-top="14" label-pos="bottom"></u-icon>
-					</u-grid-item>
-					<u-grid-item>
-						<u-icon name="order" label="退款/售后" size="48" label-size="22" margin-top="14" label-pos="bottom"></u-icon>
-					</u-grid-item>
+					<u-grid-item><u-icon name="order" label="待付款" size="48" label-size="22" margin-top="14" label-pos="bottom"></u-icon></u-grid-item>
+					<u-grid-item><u-icon name="order" label="待发货" size="48" label-size="22" margin-top="14" label-pos="bottom"></u-icon></u-grid-item>
+					<u-grid-item><u-icon name="order" label="待收货" size="48" label-size="22" margin-top="14" label-pos="bottom"></u-icon></u-grid-item>
+					<u-grid-item><u-icon name="order" label="待评价" size="48" label-size="22" margin-top="14" label-pos="bottom"></u-icon></u-grid-item>
+					<u-grid-item><u-icon name="order" label="退款/售后" size="48" label-size="22" margin-top="14" label-pos="bottom"></u-icon></u-grid-item>
 				</u-grid>
 			</view>
 
@@ -183,6 +181,9 @@ export default {
 			this.$u.route({
 				url: '/pages/' + path
 			});
+		},
+		tip() {
+			return this.$u.toast('暂未开通');
 		}
 	},
 	onLoad() {
@@ -199,9 +200,6 @@ export default {
 	.user-panel-box {
 		background-color: #ffffff;
 		padding: 40rpx 32rpx 0 32rpx;
-		/*  #ifndef H5 */
-		padding-top: 130rpx;
-		/*  #endif  */
 	}
 
 	.user-card-box {

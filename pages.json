@@ -4,13 +4,25 @@
 		"qs-(.*)": "@/qs-ui/components/qs-$1/qs-$1.vue"
 	},
 	"pages": [{
+		"path": "pages/index/index",
+		"style": {
+			"navigationStyle": "custom"
+		}
+	}, {
+		"path": "pages/find/find",
+		"style": {
+			"navigationStyle": "custom"
+		}
+	}, {
 		"path": "pages/my/my",
 		"style": {
 			"navigationStyle": "custom"
 		}
 	}, {
 		"path": "pages/my/user/user",
-		"style": {}
+		"style": {
+			"navigationBarTitleText": "个人信息"
+		}
 	}, {
 		"path": "pages/my/setting/setting",
 		"style": {}
@@ -150,6 +162,16 @@
 		"backgroundColor": "#FFFFFF",
 		"borderStyle": "white",
 		"list": [{
+			"pagePath": "pages/index/index",
+			"iconPath": "static/tabbar/tabbar-home-gray.png",
+			"selectedIconPath": "static/tabbar/tabbar-home-red.png",
+			"text": "首页"
+		}, {
+			"pagePath": "pages/find/find",
+			"iconPath": "static/tabbar/tabbar-find-gray.png",
+			"selectedIconPath": "static/tabbar/tabbar-find-red.png",
+			"text": "发现"
+		}, {
 			"pagePath": "pages/my/my",
 			"iconPath": "static/tabbar/tabbar-my-gray.png",
 			"selectedIconPath": "static/tabbar/tabbar-my-red.png",
