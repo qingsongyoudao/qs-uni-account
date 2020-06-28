@@ -17,7 +17,7 @@ export default {
 @import 'uview-ui/index.scss';
 
 /* 引入 qs-ui 基础样式 */
-@import 'qs-ui/index.scss';
+@import 'common/scss/index.scss';
 
 /* H5的时候，隐藏滚动条 */
 /* #ifdef H5 */

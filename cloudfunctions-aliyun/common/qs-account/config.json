@@ -1,0 +1,8 @@
+{
+	"passwordSecret": "passwordSecret-demo",
+	"tokenSecret": "tokenSecret-demo",
+	"tokenExpiresIn": 7200,
+	"app-plus": {
+		"tokenExpiresIn": 2592000
+	}
+}

@@ -1,7 +1,6 @@
 {
 	"easycom": {
-		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue",
-		"qs-(.*)": "@/qs-ui/components/qs-$1/qs-$1.vue"
+		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
 	},
 	"pages": [{
 		"path": "pages/index/index",

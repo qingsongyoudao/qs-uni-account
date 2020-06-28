@@ -1,13 +1,23 @@
 <template>
-	<qs-page>
-		<qs-navbar>
-			<view class="u-flex u-m-l-22">
-				<u-icon name="setting" size="38" :custom-style="{'padding': '16rpx'}" @click="openPage('my/setting/setting')"></u-icon>
-			</view>
-			<view class="u-flex u-m-r-22">
-				<u-icon name="chat" size="38" :custom-style="{'padding': '16rpx'}" @click="tip"></u-icon>
-			</view>
-		</qs-navbar>
+	<qs-page :header="true">
+		<!-- 页面头部 -->
+		<block slot="header">
+			<status-bar></status-bar>
+			<nav-bar>
+				<view class="u-flex u-m-l-10">
+					<u-icon name="setting" size="38" :custom-style="{ padding: '20rpx' }" @click="tip"></u-icon>
+				</view>
+				<view class="u-flex u-m-r-10">
+					<u-icon name="chat" size="38" :custom-style="{ padding: '20rpx' }" @click="tip"></u-icon>
+				</view>
+			</nav-bar>
+		</block>
+		<block slot="header-placeholder">
+			<status-bar></status-bar>
+			<nav-bar></nav-bar>
+		</block>
+		
+		<!-- 页面主体 -->
 		<view class="my-box">
 			<!-- 用户 -->
 			<view class="user-panel-box">
@@ -177,11 +187,16 @@ export default {
 		};
 	},
 	methods: {
+		// 打开页面
 		openPage(path) {
+			if (path == '') {
+				return this.$u.toast('暂未开通');
+			}
 			this.$u.route({
 				url: '/pages/' + path
 			});
 		},
+		// 提示
 		tip() {
 			return this.$u.toast('暂未开通');
 		}
@@ -226,7 +241,7 @@ export default {
 
 		.panel-header {
 			padding: 30rpx 32rpx 20rpx 32rpx;
-			border-bottom: 1rpx solid $qs-border-color-light;
+			border-bottom: 1rpx solid $uni-border-color-light;
 		}
 
 		.panel-main {
