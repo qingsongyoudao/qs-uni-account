@@ -3,6 +3,16 @@
 </template>
 
 <script>
+	/**
+	 * form 表单
+	 * @description 此组件一般用于表单场景，可以配置Input输入框，Select弹出框，进行表单验证等。
+	 * @tutorial http://uviewui.com/components/form.html
+	 * @property {Object} model 表单数据对象
+	 * @property {Object} rules 通过ref设置，见官网说明
+	 * @property {Array} errorType 错误的提示方式，数组形式，见上方说明(默认['message'])
+	 * @example <u-form :model="form" ref="uForm"></u-form>
+	 */
+	
 export default {
 	name: 'u-form',
 	props: {
@@ -88,7 +98,7 @@ export default {
 						if (++count === this.fields.length) {
 							resolve(valid); // 进入promise的then方法
 							// 判断是否设置了toast的提示方式，只提示最前面的表单域的第一个错误信息
-							if(this.errorType.indexOf('none') === -1 && this.errorType.indexOf('toast') >= 0) {
+							if(this.errorType.indexOf('none') === -1 && this.errorType.indexOf('toast') >= 0 && errorArr.length) {
 								this.$u.toast(errorArr[0]);
 							}
 							// 调用回调方法
@@ -102,4 +112,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped lang="scss">
+@import "../../libs/css/style.components.scss";
+</style>

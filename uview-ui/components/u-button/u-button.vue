@@ -4,10 +4,13 @@
 		class="u-btn u-line-1 u-fix-ios-appearance"
 		:class="[
 			'u-size-' + size,
-			plain ? 'u-' + type + '-plain' : '',
+			plain ? 'u-btn--' + type + '--plain' : '',
 			loading ? 'u-loading' : '',
 			shape == 'circle' ? 'u-round-circle' : '',
-			hairLine ? showHairLineBorder : 'u-bold-border'
+			hairLine ? showHairLineBorder : 'u-btn--bold-border',
+			'u-btn--' + type,
+			disabled ? `u-btn--${type}--disabled` : '',
+			
 		]"
 		:disabled="disabled"
 		:form-type="formType"
@@ -17,6 +20,7 @@
 		:send-message-title="sendMessageTitle"
 		send-message-path="sendMessagePath"
 		:lang="lang"
+		:data-name="dataName"
 		:session-from="sessionFrom"
 		:send-message-img="sendMessageImg"
 		:show-message-card="showMessageCard"
@@ -25,7 +29,7 @@
 		@error="error"
 		@opensetting="opensetting"
 		@launchapp="launchapp"
-		:style="[buttonStyle]"
+		:style="[customStyle]"
 		@tap.stop="click($event)"
 		:hover-class="getHoverClass"
 		:loading="loading"
@@ -195,6 +199,11 @@ export default {
 			default() {
 				return {};
 			}
+		},
+		// 额外传参参数，用于小程序的data-xxx属性，通过target.dataset.name获取
+		dataName: {
+			type: String,
+			default: ''
 		}
 	},
 	computed: {
@@ -205,45 +214,6 @@ export default {
 			let hoverClass = '';
 			hoverClass = this.plain ? 'u-' + this.type + '-plain-hover' : 'u-' + this.type + '-hover';
 			return hoverClass;
-		},
-		// 按钮主题
-		buttonStyle() {
-			let style = {};
-			if (this.type == 'default') {
-				if (this.disabled) {
-					style.color = '#c0c4cc';
-					style.backgroundColor = '#ffffff';
-					style.borderColor = '#e4e7ed';
-				} else {
-					style.color = this.$u.color['contentColor'];
-					style.backgroundColor = '#ffffff';
-					style.borderColor = '#c0c4cc';
-				}
-			} else {
-				if (this.disabled) {
-					if (this.plain) {
-						style.color = this.$u.color[this.type + 'Disabled'];
-						style.backgroundColor = this.$u.color[this.type + 'Light'];
-						style.borderColor = this.$u.color[this.type + 'Disabled'];
-					} else {
-						style.color = '#ffffff';
-						style.backgroundColor = this.$u.color[this.type + 'Disabled'];
-						style.borderColor = this.$u.color[this.type + 'Disabled'];
-					}
-				} else {
-					if (this.plain) {
-						style.color = this.$u.color[this.type];
-						style.backgroundColor = this.$u.color[this.type + 'Light'];
-						style.borderColor = this.$u.color[this.type + 'Disabled'];
-					} else {
-						style.color = '#ffffff';
-						style.backgroundColor = this.$u.color[this.type];
-						style.borderColor = this.$u.color[this.type];
-					}
-				}
-			}
-
-			return Object.assign(style, this.customStyle);
 		},
 		// 在'primary', 'success', 'error', 'warning'类型下，不显示边框，否则会造成四角有毛刺现象
 		showHairLineBorder() {
@@ -350,6 +320,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../../libs/css/style.components.scss';
 .u-btn::after {
 	border: none;
 }
@@ -369,6 +340,94 @@ export default {
 	z-index: 1;
 	box-sizing: border-box;
 	transition: all 0.15s;
+	
+	&--bold-border {
+		border: 1px solid #ffffff;
+	}
+	
+	&--default {
+		color: $u-content-color;
+		border-color: #c0c4cc;
+		background-color: #ffffff;
+	}
+	
+	&--primary {
+		color: #ffffff;
+		border-color: $u-type-primary;
+		background-color: $u-type-primary;
+	}
+	
+	&--success {
+		color: #ffffff;
+		border-color: $u-type-success;
+		background-color: $u-type-success;
+	}
+	
+	&--error {
+		color: #ffffff;
+		border-color: $u-type-error;
+		background-color: $u-type-error;
+	}
+	
+	&--warning {
+		color: #ffffff;
+		border-color: $u-type-warning;
+		background-color: $u-type-warning;
+	}
+	
+	&--default--disabled {
+		color: #ffffff;
+		border-color: #e4e7ed;
+		background-color: #ffffff;
+	}
+	
+	&--primary--disabled {
+		color: #ffffff!important;
+		border-color: $u-type-primary-disabled!important;
+		background-color: $u-type-primary-disabled!important;
+	}
+	
+	&--success--disabled {
+		color: #ffffff!important;
+		border-color: $u-type-success-disabled!important;
+		background-color: $u-type-success-disabled!important;
+	}
+	
+	&--error--disabled {
+		color: #ffffff!important;
+		border-color: $u-type-error-disabled!important;
+		background-color: $u-type-error-disabled!important;
+	}
+	
+	&--warning--disabled {
+		color: #ffffff!important;
+		border-color: $u-type-warning-disabled!important;
+		background-color: $u-type-warning-disabled!important;
+	}
+	
+	&--primary--plain {
+		color: $u-type-primary!important;
+		border-color: $u-type-primary-disabled!important;
+		background-color: $u-type-primary-light!important;
+	}
+	
+	&--success--plain {
+		color: $u-type-success!important;
+		border-color: $u-type-success-disabled!important;
+		background-color: $u-type-success-light!important;
+	}
+	
+	&--error--plain {
+		color: $u-type-error!important;
+		border-color: $u-type-error-disabled!important;
+		background-color: $u-type-error-light!important;
+	}
+	
+	&--warning--plain {
+		color: $u-type-warning!important;
+		border-color: $u-type-warning-disabled!important;
+		background-color: $u-type-warning-light!important;
+	}
 }
 
 .u-hairline-border:after {
@@ -388,10 +447,6 @@ export default {
 	transform: scale(0.5, 0.5);
 	border: 1px solid currentColor;
 	z-index: 1;
-}
-
-.u-bold-border {
-	border: 1px solid #ffffff;
 }
 
 .u-wave-ripple {

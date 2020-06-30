@@ -7,8 +7,8 @@
 		 :style="{
 				height: height + 'rpx'
 			}">
-			<swiper-item class="u-swiper-item" v-for="(item, index) in list" :key="index" @tap="listClick(index)">
-				<view class="u-list-image-wrap" :class="[current != index ? 'u-list-scale' : '']" :style="{
+			<swiper-item class="u-swiper-item" v-for="(item, index) in list" :key="index">
+				<view class="u-list-image-wrap" @tap.stop.prevent="listClick(index)" :class="[current != index ? 'u-list-scale' : '']" :style="{
 						borderRadius: `${borderRadius}rpx`,
 						transform: effect3d && current != index ? 'scaleY(0.9)' : 'scaleY(1)',
 						margin: effect3d && current != index ? '0 20rpx' : 0,
@@ -193,7 +193,10 @@
 				this.$emit('click', index);
 			},
 			change(e) {
-				this.current = e.detail.current;
+				let current = e.detail.current;
+				this.current = current;
+				// 发出change事件，表示当前自动切换的index，从0开始
+				this.$emit('change', current);
 			},
 			// 头条小程序不支持animationfinish事件，改由change事件
 			// 暂不监听此事件，因为不再给swiper绑定current属性
@@ -207,6 +210,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-swiper-wrap {
 		position: relative;
 		overflow: hidden;

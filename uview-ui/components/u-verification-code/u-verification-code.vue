@@ -1,6 +1,6 @@
 <template>
 	<view class="u-code-wrap">
-
+		<!-- 此组件功能由js完成，无需写html逻辑 -->
 	</view>
 </template>
 
@@ -83,7 +83,7 @@
 					// 剩余尚未执行完的倒计秒数
 					this.secNum = lastTimestamp - nowTimestamp;
 					// 清除本地保存的变量
-					uni.setStorageSync(this.uniqueKey + '_$uCountDownTimestamp', 0);
+					uni.removeStorageSync(this.uniqueKey + '_$uCountDownTimestamp');
 					// 开始倒计时
 					this.start();
 				} else {
@@ -138,7 +138,7 @@
 					// 将本该结束时候的时间戳保存起来 => 当前时间戳 + 剩余的秒数
 					uni.setStorage({
 						key: this.uniqueKey + '_$uCountDownTimestamp',
-						data: nowTimestamp + this.secNum
+						data: nowTimestamp + Number(this.secNum)
 					})
 				}
 			}
@@ -153,6 +153,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-code-wrap {
 		width: 0;
 		height: 0;

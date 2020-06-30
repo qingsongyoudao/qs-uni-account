@@ -8,7 +8,7 @@
 				</view>
 				<slot v-else name="title" />
 				<view class="u-icon-wrap">
-					<u-icon v-if="arrow" :color="arrowColor ? arrowColor : $u.color.tipsColor" :class="{ 'u-arrow-down-icon-active': isShow }"
+					<u-icon v-if="arrow" :color="arrowColor" :class="{ 'u-arrow-down-icon-active': isShow }"
 					 class="u-arrow-down-icon" name="arrow-down"></u-icon>
 				</view>
 			</block>
@@ -94,9 +94,7 @@
 			};
 		},
 		mounted() {
-			this.$nextTick(() => {
-				this.queryRect();
-			});
+			this.init();
 		},
 		watch: {
 			open(val) {
@@ -123,6 +121,12 @@
 			this.hoverClass = this.uCollapse.hoverClass;
 		},
 		methods: {
+			// 异步获取内容，或者动态修改了内容时，需要重新初始化
+			init() {
+				this.$nextTick(() => {
+					this.queryRect();
+				});
+			},
 			// 点击collapsehead头部
 			headClick() {
 				if (this.disabled) return;
@@ -159,6 +163,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-collapse-head {
 		position: relative;
 		display: flex;

@@ -1,7 +1,5 @@
 <template>
 	<view class="u-row" :style="{
-		marginLeft: `-${gutter/2 + 'rpx'}`,
-		marginRight: `-${gutter/2 + 'rpx'}`,
 		alignItems: uAlignItem,
 		justifyContent: uJustify
 	}">
@@ -59,6 +57,8 @@
 </script>
 
 <style lang="scss">
+	@import "../../libs/css/style.components.scss";
+	
 	.u-row {
 		// 由于微信小程序编译后奇怪的页面结构，只能使用float布局实现，flex无法实现
 		/* #ifndef MP-WEIXIN */

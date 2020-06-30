@@ -81,12 +81,16 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-table {
 		width: 100%;
 		box-sizing: border-box;
 	}
 
+	/* #ifdef MP */
 	.u-table /deep/ t-tr {
 		display: flex;
 	}
+	/* #endif */
 </style>
