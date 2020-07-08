@@ -2,24 +2,28 @@
 	<account-page :title="title" :desc="desc">
 		<view class="account-form-box">
 			<u-form :model="model" ref="uForm" :errorType="form.errorType">
-				<u-form-item class="form-item" label="账号" prop="user" :label-position="form.labelPosition">
-					<u-input v-model="model.user" placeholder="请输入手机号/邮箱/用户名" type="text" />
+				<u-form-item class="form-item" label="用户名" prop="userName" :label-position="form.labelPosition">
+					<u-input v-model="model.userName" placeholder="4-20位的数字和字母" type="text" />
 				</u-form-item>
 				<u-form-item class="form-item" label="密码" prop="password" :label-position="form.labelPosition">
-					<u-input v-model="model.password" placeholder="请输入登录密码" type="password" />
+					<u-input v-model="model.password" placeholder="6-20位的数字和字母" type="password" />
+				</u-form-item>
+				<u-form-item class="form-item" label="确认密码" prop="confirmPassword" :label-position="form.labelPosition">
+					<u-input v-model="model.confirmPassword" placeholder="请再次输入密码" type="password" />
 				</u-form-item>
 			</u-form>
 
-			<u-gap height="40"></u-gap>
-
-			<u-button type="primary" @click="submit">登 录</u-button>
+			<u-verification-code seconds="60" ref="uCode" @change="codeChange"></u-verification-code>
 
 			<u-gap height="40"></u-gap>
 
-			<view class="u-flex">
-				<view class="u-flex-1 u-text-left" @click="openPage('login/sms-login')">短信登录</view>
-				<view class="u-flex-1 u-text-center" @click="openPage('register/register')">注册</view>
-				<view class="u-flex-1 u-text-right" @click="openPage('findPassword/findPassword')">忘记密码</view>
+			<u-button type="primary" @click="submit">立即提交</u-button>
+
+			<u-gap height="40"></u-gap>
+
+			<view class="u-flex u-row-between">
+				<view @click="openPage('register/mobile-register')">手机号注册</view>
+				<view @click="openPage('login/login')">登录</view>
 			</view>
 		</view>
 
@@ -31,23 +35,40 @@
 export default {
 	data() {
 		return {
-			title: '账号密码登录',
+			title: '用户名注册',
 			desc: '',
+			codeTips: '',
 			form: {
 				errorType: ['message'],
 				labelPosition: 'top'
 			},
 			model: {
-				/* 账号 */
-				user: '',
+				/* 用户名 */
+				userName: '',
 				/* 密码 */
-				password: ''
+				password: '',
+				/* 确认密码 */
+				confirmPassword: ''
 			},
 			rules: {
-				user: [
+				userName: [
 					{
 						required: true,
-						message: '请输入手机号/邮箱/用户名',
+						message: '请输入用户名',
+						trigger: ['change', 'blur']
+					},
+					{
+						min: 4,
+						max: 20,
+						message: '用户名长度在4到20个字符',
+						trigger: ['change', 'blur']
+					},
+					{
+						pattern: /^[0-9a-zA-Z]*$/g,
+						transform(value) {
+							return String(value);
+						},
+						message: '用户名为字母或数字',
 						trigger: ['change', 'blur']
 					}
 				],
@@ -71,6 +92,20 @@ export default {
 						message: '密码为字母或数字',
 						trigger: ['change', 'blur']
 					}
+				],
+				confirmPassword: [
+					{
+						required: true,
+						message: '请再次输入密码',
+						trigger: ['change', 'blur']
+					},
+					{
+						validator: (rule, value, callback) => {
+							return value === this.model.password;
+						},
+						message: '两次输入的密码不相等',
+						trigger: ['change', 'blur']
+					}
 				]
 			}
 		};
@@ -85,7 +120,7 @@ export default {
 			this.$refs.uForm.validate(valid => {
 				if (valid) {
 					var reqData = {
-						action: 'login',
+						action: 'register',
 						params: this.model
 					};
 					uniCloud
@@ -101,7 +136,7 @@ export default {
 								this.$u.vuex('vuex_user.id', ret.data.uid);
 								this.$u.vuex('vuex_token.accessToken', ret.data.token);
 								uni.navigateBack();
-								return this.$u.toast('登录成功');
+								return this.$u.toast('注册成功');
 							} else {
 								return this.$u.toast(ret.msg);
 							}
@@ -110,6 +145,9 @@ export default {
 					console.log('验证失败');
 				}
 			});
+		},
+		codeChange(text) {
+			this.codeTips = text;
 		}
 	},
 	onReady() {

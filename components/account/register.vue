@@ -34,6 +34,11 @@ export default {
 		return {
 			cells: [
 				{
+					title: '通过用户名注册',
+					value: '',
+					path: 'register/userName-register'
+				},
+				{
 					title: '通过邮箱注册',
 					value: '',
 					path: 'register/email-register'

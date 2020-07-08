@@ -102,12 +102,30 @@ export default {
 			});
 		},
 		logout() {
-			this.$u.vuex('vuex_user.hasLogin', false);
-			this.$u.vuex('vuex_user.userId', '');
-			this.$u.vuex('vuex_user.userName', '');
-			this.$u.vuex('vuex_user.userFace', '');
-			this.$u.toast('退出成功');
-			uni.navigateBack();
+			var reqData = {
+				action: 'logout',
+				params: {
+					token: this.vuex_token.accessToken
+				}
+			};
+			uniCloud
+				.callFunction({
+					name: 'account',
+					data: reqData
+				})
+				.then(res => {
+					console.log(res);
+					let ret = res.result;
+					if (ret.code == 1) {
+						this.$u.vuex('vuex_user.hasLogin', false);
+						this.$u.vuex('vuex_user.id', '');
+						this.$u.vuex('vuex_token.accessToken', '');
+						uni.navigateBack();
+						return this.$u.toast('退出成功');
+					} else {
+						return this.$u.toast(ret.msg);
+					}
+				});
 		}
 	}
 };

@@ -145,7 +145,11 @@
 	}, {
 		"path": "pages/account/unbindAlipay/unbindAlipay",
 		"style": {}
-	}],
+	}    ,{
+            "path" : "pages/account/register/userName-register",
+            "style" : {}
+        }
+    ],
 	"globalStyle": {
 		"pageOrientation": "portrait",
 		"navigationBarTextStyle": "black",

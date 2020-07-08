@@ -12,6 +12,8 @@ exports.main = async (event, context) => {
 	let params = event.params
 	// 返回
 	let res = {}
+	// payload
+	let payload = {}
 
 	switch (action) {
 		case 'register':
@@ -23,7 +25,7 @@ exports.main = async (event, context) => {
 		case 'register-mobile':
 			res = await qsAccount.registerByMobile(params);
 			break;
-		case 'login-pwd':
+		case 'login':
 			res = await qsAccount.loginByPwd(params);
 			break;
 		case 'login-sms':
@@ -33,7 +35,7 @@ exports.main = async (event, context) => {
 			res = await qsAccount.loginByWeixin(params);
 			break;
 		case 'logout':
-			res = await qsAccount.logout(params);
+			res = await qsAccount.logout(params.token);
 			break;
 		case 'set-password':
 			res = await qsAccount.setPassword(params);

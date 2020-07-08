@@ -4,19 +4,15 @@
 		<block slot="header">
 			<status-bar></status-bar>
 			<nav-bar>
-				<view class="u-flex u-m-l-10">
-					<u-icon name="setting" size="38" :custom-style="{ padding: '20rpx' }" @click="tip"></u-icon>
-				</view>
-				<view class="u-flex u-m-r-10">
-					<u-icon name="chat" size="38" :custom-style="{ padding: '20rpx' }" @click="tip"></u-icon>
-				</view>
+				<view class="u-flex u-m-l-10"><u-icon name="setting" size="38" :custom-style="{ padding: '20rpx' }" @click="tip"></u-icon></view>
+				<view class="u-flex u-m-r-10"><u-icon name="chat" size="38" :custom-style="{ padding: '20rpx' }" @click="tip"></u-icon></view>
 			</nav-bar>
 		</block>
 		<block slot="header-placeholder">
 			<status-bar></status-bar>
 			<nav-bar></nav-bar>
 		</block>
-		
+
 		<!-- 页面主体 -->
 		<view class="my-box">
 			<!-- 用户 -->
@@ -66,9 +62,7 @@
 
 			<!-- 订单 -->
 			<view class="panel-box">
-				<view class="panel-header">
-					<u-section title="我的订单" sub-title="查看全部订单" :bold="false" :show-line="false"></u-section>
-				</view>
+				<view class="panel-header"><u-section title="我的订单" sub-title="查看全部订单" :bold="false" :show-line="false"></u-section></view>
 				<u-grid :col="5" :border="false" class="panel-main">
 					<u-grid-item><u-icon name="order" label="待付款" size="48" label-size="22" margin-top="14" label-pos="bottom"></u-icon></u-grid-item>
 					<u-grid-item><u-icon name="order" label="待发货" size="48" label-size="22" margin-top="14" label-pos="bottom"></u-icon></u-grid-item>
@@ -199,6 +193,35 @@ export default {
 		// 提示
 		tip() {
 			return this.$u.toast('暂未开通');
+		},
+		test() {
+			var reqData = {
+				action: 'login',
+				params: {
+					user: 'test',
+					passsword: ''
+				}
+			};
+			uniCloud
+				.callFunction({
+					name: 'account',
+					data: reqData
+				})
+				.then(
+					res => {
+						console.log(res);
+						let ret = res.result;
+						if (ret.code == 1) {
+							return this.$u.toast('成功');
+						} else {
+							return this.$u.toast(ret.msg);
+						}
+					},
+					err => {
+						console.log(err);
+						return this.$u.toast('出错，请稍后再试');
+					}
+				);
 		}
 	},
 	onLoad() {

@@ -135,7 +135,28 @@ export default {
 		submit() {
 			this.$refs.uForm.validate(valid => {
 				if (valid) {
-					return this.$u.toast('验证通过');
+					var reqData = {
+						action: 'register-email',
+						params: this.model
+					};
+					uniCloud
+						.callFunction({
+							name: 'account',
+							data: reqData
+						})
+						.then(res => {
+							console.log(res);
+							let ret = res.result;
+							if (ret.code == 1) {
+								this.$u.vuex('vuex_user.hasLogin', true);
+								this.$u.vuex('vuex_user.id', ret.data.uid);
+								this.$u.vuex('vuex_token.accessToken', ret.data.token);
+								uni.navigateBack();
+								return this.$u.toast('注册成功');
+							} else {
+								return this.$u.toast(ret.msg);
+							}
+						});
 				} else {
 					console.log('验证失败');
 				}
