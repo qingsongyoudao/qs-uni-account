@@ -1,12 +1,10 @@
 {
-  "name": "qs-account",
-  "version": "1.0.5",
-  "description": "qs-account for qingsongyoudao",
+  "name": "qs-unicloud-account",
+  "version": "1.0.10",
+  "description": "为 uniCloud 开发者提供了简单、统一、可扩展的账户模块云函数类插件，支持阿里云、腾讯云。",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
+  "scripts": {},
+  "keywords": ["uni", "uniCloud"],
   "author": "",
-  "license": "ISC"
+  "license": "Apache-2.0"
 }

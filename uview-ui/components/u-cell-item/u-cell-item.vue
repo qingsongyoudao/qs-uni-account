@@ -36,7 +36,7 @@
 			<slot v-else></slot>
 		</view>
 		<u-icon v-if="arrow" name="arrow-right" :style="[arrowStyle]" class="u-icon-wrap u-cell__right-icon-wrap"></u-icon>
-		<view class="u-flex" v-else>
+		<view class="u-flex" v-if="$slots['right-icon']">
 			<slot name="right-icon"></slot>
 		</view>
 	</view>
@@ -188,7 +188,7 @@ export default {
 	},
 	data() {
 		return {
-			
+
 		};
 	},
 	computed: {
@@ -267,6 +267,7 @@ export default {
 	font-size: 26rpx;
 	line-height: 36rpx;
 	color: $u-tips-color;
+	word-wrap: break-word;
 }
 
 .u-cell__value {

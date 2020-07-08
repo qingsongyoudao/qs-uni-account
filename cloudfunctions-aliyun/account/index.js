@@ -14,17 +14,20 @@ exports.main = async (event, context) => {
 	let res = {}
 
 	switch (action) {
-		case 'login-pwd':
-			res = await qsAccount.loginByPwd(params);
-			break;
-		case 'login-sms':
-			res = await qsAccount.loginBySms()(params);
+		case 'register':
+			res = await qsAccount.registerByUserName(params);
 			break;
 		case 'register-email':
 			res = await qsAccount.registerByEmail(params);
 			break;
 		case 'register-mobile':
 			res = await qsAccount.registerByMobile(params);
+			break;
+		case 'login-pwd':
+			res = await qsAccount.loginByPwd(params);
+			break;
+		case 'login-sms':
+			res = await qsAccount.loginBySms()(params);
 			break;
 		default:
 			res = {
