@@ -21,7 +21,7 @@
 
 			<u-gap height="40"></u-gap>
 
-			<u-button type="primary" @click="submit">立即提交</u-button>
+			<u-button :disabled="form.button.loading" type="primary" @click="submit">立即提交</u-button>
 
 			<u-gap height="40"></u-gap>
 
@@ -36,6 +36,8 @@
 </template>
 
 <script>
+var api = require('@/common/js/account.api.js');
+
 export default {
 	data() {
 		return {
@@ -44,7 +46,10 @@ export default {
 			codeTips: '',
 			form: {
 				errorType: ['message'],
-				labelPosition: 'top'
+				labelPosition: 'top',
+				button: {
+					loading: false
+				}
 			},
 			model: {
 				/* 手机号 */
@@ -135,27 +140,25 @@ export default {
 		submit() {
 			this.$refs.uForm.validate(valid => {
 				if (valid) {
-					var reqData = {
-						action: 'register-mobile',
-						params: this.model
-					};
-					uniCloud
-						.callFunction({
-							name: 'account',
-							data: reqData
-						})
+					this.form.button.loading = true
+					api.registerByMobile(this.model)
 						.then(res => {
-							console.log(res);
-							let ret = res.result;
-							if (ret.code == 1) {
-								this.$u.vuex('vuex_user.hasLogin', true);
-								this.$u.vuex('vuex_user.id', ret.data.uid);
-								this.$u.vuex('vuex_token.accessToken', ret.data.token);
-								uni.navigateBack();
-								return this.$u.toast('注册成功');
+							this.form.button.loading = false
+							console.log(res)
+							if (res.code == 1) {
+								this.$u.vuex('vuex_user.hasLogin', true)
+								this.$u.vuex('vuex_user.id', res.data.uid)
+								this.$u.vuex('vuex_token.accessToken', res.data.token)
+								uni.navigateBack()
+								return this.$u.toast('注册成功')
 							} else {
-								return this.$u.toast(ret.msg);
+								return this.$u.toast(res.msg)
 							}
+						})
+						.catch((err) => {
+							this.form.button.loading = false
+							console.log(err)
+							return this.$u.toast('出错，请稍后再试')
 						});
 				} else {
 					console.log('验证失败');

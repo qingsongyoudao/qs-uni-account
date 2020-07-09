@@ -24,6 +24,16 @@ module.exports = {
 	// 注册
 	register(params) {
 		return new Promise((resolve, reject) => {
+			this.accountCloud('register', params).then((res) => {
+				console.log(res)
+				resolve(res)
+			}).catch((err) => {
+				console.log(err)
+			})
+		})
+	},
+	registerByEmail(params) {
+		return new Promise((resolve, reject) => {
 			this.accountCloud('register-email', params).then((res) => {
 				console.log(res)
 				resolve(res)

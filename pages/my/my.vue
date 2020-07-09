@@ -227,22 +227,6 @@ export default {
 		}
 	},
 	onLoad() {
-		api.login({
-			user: 'qing',
-			passsword: '12'
-		})
-			.then(res => {
-				uni.showModal({
-					showCancel: false,
-					content: JSON.stringify(res)
-				});
-			})
-			.catch(() => {
-				uni.showModal({
-					showCancel: false,
-					content: '微信绑定失败，请稍后再试'
-				});
-			});
 		if (this.vuex_user.hasLogin) {
 			this.list.model.user.nickName = this.vuex_user.userName;
 			this.list.model.user.userFace = this.vuex_user.userFace;
