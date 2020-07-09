@@ -1,34 +1,39 @@
 <template>
-	<account-page :title="title" :desc="desc">
-		<view class="account-form-box">
-			<u-form :model="model" ref="uForm" :errorType="form.errorType">
-				<u-form-item class="form-item" label="用户名" prop="userName" :label-position="form.labelPosition">
-					<u-input v-model="model.userName" placeholder="4-20位的数字和字母" type="text" />
-				</u-form-item>
-				<u-form-item class="form-item" label="密码" prop="password" :label-position="form.labelPosition">
-					<u-input v-model="model.password" placeholder="6-20位的数字和字母" type="password" />
-				</u-form-item>
-				<u-form-item class="form-item" label="确认密码" prop="confirmPassword" :label-position="form.labelPosition">
-					<u-input v-model="model.confirmPassword" placeholder="请再次输入密码" type="password" />
-				</u-form-item>
-			</u-form>
-
-			<u-verification-code seconds="60" ref="uCode" @change="codeChange"></u-verification-code>
-
-			<u-gap height="40"></u-gap>
-
-			<u-button :disabled="form.button.loading" type="primary" @click="submit">立即提交</u-button>
-
-			<u-gap height="40"></u-gap>
-
-			<view class="u-flex u-row-between">
-				<view @click="openPage('register/mobile-register')">手机号注册</view>
-				<view @click="openPage('login/login')">登录</view>
-			</view>
+	<view class="account-page">
+		<view class="page-header">
+			<view class="page-title">{{ title }}</view>
 		</view>
+		<view class="page-body">
+			<view class="form-box">
+				<u-form :model="model" ref="uForm" label-position="top">
+					<u-form-item class="form-item" label="用户名" prop="userName">
+						<u-input v-model="model.userName" placeholder="4-20位的数字和字母" type="text" />
+					</u-form-item>
+					<u-form-item class="form-item" label="密码" prop="password">
+						<u-input v-model="model.password" placeholder="6-20位的数字和字母" type="password" />
+					</u-form-item>
+					<u-form-item class="form-item" label="确认密码" prop="confirmPassword">
+						<u-input v-model="model.confirmPassword" placeholder="请再次输入密码" type="password" />
+					</u-form-item>
+				</u-form>
 
-		<u-gap height="40"></u-gap>
-	</account-page>
+				<u-verification-code seconds="60" ref="uCode" @change="codeChange"></u-verification-code>
+
+				<u-gap height="40"></u-gap>
+
+				<u-button :disabled="form.button.loading" type="primary" @click="submit">立即提交</u-button>
+
+				<u-gap height="40"></u-gap>
+
+				<view class="u-flex u-row-between">
+					<view @click="openPage('register/mobile-register')">手机号注册</view>
+					<view @click="openPage('login/login')">登录</view>
+				</view>
+			</view>
+
+			<u-gap height="60"></u-gap>
+		</view>
+	</view>
 </template>
 
 <script>
@@ -41,8 +46,6 @@ export default {
 			desc: '',
 			codeTips: '',
 			form: {
-				errorType: ['message'],
-				labelPosition: 'top',
 				button: {
 					loading: false
 				}
@@ -124,25 +127,25 @@ export default {
 		submit() {
 			this.$refs.uForm.validate(valid => {
 				if (valid) {
-					this.form.button.loading = true
+					this.form.button.loading = true;
 					api.register(this.model)
 						.then(res => {
-							this.form.button.loading = false
-							console.log(res)
+							this.form.button.loading = false;
+							console.log(res);
 							if (res.code == 1) {
-								this.$u.vuex('vuex_user.hasLogin', true)
-								this.$u.vuex('vuex_user.id', res.data.uid)
-								this.$u.vuex('vuex_token.accessToken', res.data.token)
-								uni.navigateBack()
-								return this.$u.toast('注册成功')
+								this.$u.vuex('vuex_user.hasLogin', true);
+								this.$u.vuex('vuex_user.id', res.data.uid);
+								this.$u.vuex('vuex_token.accessToken', res.data.token);
+								uni.navigateBack();
+								return this.$u.toast('注册成功');
 							} else {
-								return this.$u.toast(res.msg)
+								return this.$u.toast(res.msg);
 							}
 						})
-						.catch((err) => {
-							this.form.button.loading = false
-							console.log(err)
-							return this.$u.toast('出错，请稍后再试')
+						.catch(err => {
+							this.form.button.loading = false;
+							console.log(err);
+							return this.$u.toast('出错，请稍后再试');
 						});
 				} else {
 					console.log('验证失败');
@@ -160,7 +163,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.account-form-box {
-	padding: 0 32rpx;
-}
+@import '../scss/account.scss';
 </style>

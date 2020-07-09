@@ -1,6 +1,10 @@
 <template>
-	<account-page :title="title" :desc="desc">
-		<view class="account-form-box">
+	<view class="account-page">
+		<view class="page-header">
+			<view class="page-title">{{ title }}</view>
+		</view>
+		<view class="page-body">
+		<view class="form-box">
 			<u-form :model="model" ref="uForm" :errorType="form.errorType">
 				<u-form-item class="form-item" label="当前微信账号" prop="currentWeixin" :label-position="form.labelPosition">
 					<u-input :disabled="true" v-model="model.currentWeixin" type="text" />
@@ -15,8 +19,9 @@
 			</view>
 		</view>
 		
-		<u-gap height="40"></u-gap>
-	</account-page>
+			<u-gap height="60"></u-gap>
+		</view>
+	</view>
 </template>
 
 <script>
@@ -47,7 +52,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.account-form-box {
-	padding: 0 32rpx;
-}
+@import '../scss/account.scss';
 </style>

@@ -1,6 +1,10 @@
 <template>
-	<account-page :title="title" :desc="desc">
-		<view class="account-form-box">
+	<view class="account-page">
+		<view class="page-header">
+			<view class="page-title">{{ title }}</view>
+		</view>
+		<view class="page-body">
+		<view class="form-box">
 			<u-form :model="model" ref="uForm" :errorType="form.errorType">
 				<u-form-item class="form-item" label="手机号" prop="mobile" :label-position="form.labelPosition">
 					<u-input v-model="model.mobile" placeholder="您的常用手机号" type="text" />
@@ -18,8 +22,9 @@
 			<u-button type="primary" @click="submit">确认绑定</u-button>
 		</view>
 		
-		<u-gap height="40"></u-gap>
-	</account-page>
+			<u-gap height="60"></u-gap>
+		</view>
+	</view>
 </template>
 
 <script>
@@ -119,7 +124,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.account-form-box {
-	padding: 0 32rpx;
-}
+@import '../scss/account.scss';
 </style>

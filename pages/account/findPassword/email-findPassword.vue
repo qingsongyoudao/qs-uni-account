@@ -1,7 +1,11 @@
 <template>
-	<account-page :title="title" :desc="desc">
-		<view class="account-form-box">
-			<u-form :model="model" ref="uForm" :errorType="form.errorType">
+	<view class="account-page">
+		<view class="page-header">
+			<view class="page-title">{{ title }}</view>
+		</view>
+		<view class="page-body">
+			<view class="form-box">
+			<u-form :model="model" ref="uForm" label-position="top">
 				<u-form-item class="form-item" label="邮箱" prop="email" :label-position="form.labelPosition">
 					<u-input v-model="model.email" placeholder="已验证的邮箱" type="text" />
 				</u-form-item>
@@ -21,7 +25,7 @@
 		
 			<u-gap height="40"></u-gap>
 		
-			<u-button type="primary" @click="submit">立即提交</u-button>
+			<u-button :disabled="form.button.loading" type="primary" @click="submit">立即提交</u-button>
 		
 			<u-gap height="40"></u-gap>
 		
@@ -31,11 +35,14 @@
 			</view>
 		</view>
 
-		<u-gap height="40"></u-gap>
-	</account-page>
+			<u-gap height="60"></u-gap>
+		</view>
+	</view>
 </template>
 
 <script>
+var api = require('@/common/js/account.api.js');
+
 export default {
 	data() {
 		return {
@@ -43,8 +50,9 @@ export default {
 			desc: '',
 			codeTips: '',
 			form: {
-				errorType: ['message'],
-				labelPosition: 'top'
+				button: {
+					loading: false
+				}
 			},
 			model: {
 				/* 邮箱 */
@@ -171,7 +179,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.account-form-box {
-	padding: 0 32rpx;
-}
+@import '../scss/account.scss';
 </style>

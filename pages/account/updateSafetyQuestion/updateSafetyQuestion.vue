@@ -1,5 +1,12 @@
 <template>
-	<account-page :title="title"></account-page>
+	<view class="account-page">
+		<view class="page-header">
+			<view class="page-title">{{ title }}</view>
+		</view>
+		<view class="page-body">
+			<u-gap height="60"></u-gap>
+		</view>
+	</view>
 </template>
 
 <script>
@@ -19,4 +26,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@import '../scss/account.scss';
+</style>

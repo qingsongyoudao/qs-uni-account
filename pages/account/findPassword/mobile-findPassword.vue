@@ -1,49 +1,57 @@
 <template>
-	<account-page :title="title" :desc="desc">
-		<view class="account-form-box">
-			<u-form :model="model" ref="uForm" :errorType="form.errorType">
-				<u-form-item class="form-item" label="手机号" prop="mobile" :label-position="form.labelPosition">
-					<u-input v-model="model.mobile" placeholder="已验证的手机号" type="text" />
-				</u-form-item>
-				<u-form-item class="form-item" label="短信验证码" prop="verifyCode" :label-position="form.labelPosition">
-					<u-input v-model="model.verifyCode" placeholder="请输入验证码" type="number" />
-					<u-button slot="right" type="success" size="mini" @click="getCode">{{ codeTips }}</u-button>
-				</u-form-item>
-				<u-form-item class="form-item" label="新密码" prop="newPassword" :label-position="form.labelPosition">
-					<u-input v-model="model.newPassword" placeholder="新密码(6-20位的数字和字母)" type="password" />
-				</u-form-item>
-				<u-form-item class="form-item" label="确认密码" prop="confirmPassword" :label-position="form.labelPosition">
-					<u-input v-model="model.confirmPassword" placeholder="请再次输入新密码" type="password" />
-				</u-form-item>
-			</u-form>
-		
-			<u-verification-code seconds="60" ref="uCode" @change="codeChange"></u-verification-code>
-		
-			<u-gap height="40"></u-gap>
-		
-			<u-button type="primary" @click="submit">立即提交</u-button>
-		
-			<u-gap height="40"></u-gap>
-		
-			<view class="u-flex u-row-between">
-				<view @click="openPage('findPassword/email-findPassword')">邮箱找回密码</view>
-				<view @click="openPage('login/login')">登录</view>
-			</view>
+	<view class="account-page">
+		<view class="page-header">
+			<view class="page-title">{{ title }}</view>
 		</view>
+		<view class="page-body">
+			<view class="form-box">
+				<u-form :model="model" ref="uForm" label-position="top">
+					<u-form-item class="form-item" label="手机号" prop="mobile" :label-position="form.labelPosition">
+						<u-input v-model="model.mobile" placeholder="已验证的手机号" type="text" />
+					</u-form-item>
+					<u-form-item class="form-item" label="短信验证码" prop="verifyCode" :label-position="form.labelPosition">
+						<u-input v-model="model.verifyCode" placeholder="请输入验证码" type="number" />
+						<u-button slot="right" type="success" size="mini" @click="getCode">{{ codeTips }}</u-button>
+					</u-form-item>
+					<u-form-item class="form-item" label="新密码" prop="newPassword" :label-position="form.labelPosition">
+						<u-input v-model="model.newPassword" placeholder="新密码(6-20位的数字和字母)" type="password" />
+					</u-form-item>
+					<u-form-item class="form-item" label="确认密码" prop="confirmPassword" :label-position="form.labelPosition">
+						<u-input v-model="model.confirmPassword" placeholder="请再次输入新密码" type="password" />
+					</u-form-item>
+				</u-form>
 
-		<u-gap height="40"></u-gap>
-	</account-page>
+				<u-verification-code seconds="60" ref="uCode" @change="codeChange"></u-verification-code>
+
+				<u-gap height="40"></u-gap>
+
+				<u-button :disabled="form.button.loading" type="primary" @click="submit">立即提交</u-button>
+
+				<u-gap height="40"></u-gap>
+
+				<view class="u-flex u-row-between">
+					<view @click="openPage('findPassword/email-findPassword')">邮箱找回密码</view>
+					<view @click="openPage('login/login')">登录</view>
+				</view>
+			</view>
+
+			<u-gap height="60"></u-gap>
+		</view>
+	</view>
 </template>
 
 <script>
+var api = require('@/common/js/account.api.js');
+
 export default {
 	data() {
 		return {
 			title: '通过手机号找回密码',
 			desc: '',
 			form: {
-				errorType: ['message'],
-				labelPosition: 'top'
+				button: {
+					loading: false
+				}
 			},
 			model: {
 				/* 手机号 */
@@ -170,7 +178,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.account-form-box {
-	padding: 0 32rpx;
-}
+@import '../scss/account.scss';
 </style>
