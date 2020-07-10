@@ -4,20 +4,20 @@
 			<view class="page-title">{{ title }}</view>
 		</view>
 		<view class="page-body">
-		<view class="form-box">
-			<u-form :model="model" ref="uForm" :errorType="form.errorType">
-				<u-form-item class="form-item" label="密码" prop="password" :label-position="form.labelPosition">
-					<u-input v-model="model.password" placeholder="6-20位的数字和字母" type="password" />
-				</u-form-item>
-				<u-form-item class="form-item" label="确认密码" prop="confirmPassword" :label-position="form.labelPosition">
-					<u-input v-model="model.confirmPassword" placeholder="请再次输入密码" type="password" />
-				</u-form-item>
-			</u-form>
+			<view class="form-box">
+				<u-form :model="model" ref="uForm" label-position="top">
+					<u-form-item class="form-item" label="密码" prop="password">
+						<u-input v-model="model.password" placeholder="6-20位的数字和字母" type="password" />
+					</u-form-item>
+					<u-form-item class="form-item" label="确认密码" prop="confirmPassword">
+						<u-input v-model="model.confirmPassword" placeholder="请再次输入密码" type="password" />
+					</u-form-item>
+				</u-form>
 
-			<u-gap height="40"></u-gap>
+				<u-gap height="40"></u-gap>
 
-			<u-button type="primary" @click="submit">确认设置</u-button>
-		</view>
+				<u-button :disabled="form.button.loading" type="primary" @click="submit">确认设置</u-button>
+			</view>
 
 			<u-gap height="60"></u-gap>
 		</view>
@@ -25,14 +25,17 @@
 </template>
 
 <script>
+var api = require('@/common/js/account.api.js');
+
 export default {
 	data() {
 		return {
 			title: '设置密码',
 			desc: '6至20位，由数字或字母组成',
 			form: {
-				errorType: ['message'],
-				labelPosition: 'top'
+				button: {
+					loading: false
+				}
 			},
 			model: {
 				/* 密码 */
@@ -83,7 +86,24 @@ export default {
 		submit() {
 			this.$refs.uForm.validate(valid => {
 				if (valid) {
-					return this.$u.toast('验证通过');
+					this.form.button.loading = true;
+					let params = this.model;
+					params.token = this.vuex_token;
+					api.setPassword(params)
+						.then(res => {
+							this.form.button.loading = false;
+							console.log(res);
+							if (res.code == 1) {
+								return this.$u.toast('设置成功');
+							} else {
+								return this.$u.toast(res.msg);
+							}
+						})
+						.catch(err => {
+							this.form.button.loading = false;
+							console.log(err);
+							return this.$u.toast('出错，请稍后再试');
+						});
 				} else {
 					console.log('验证失败');
 				}
