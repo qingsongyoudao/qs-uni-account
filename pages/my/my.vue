@@ -25,11 +25,11 @@
 				</view>
 				<!-- 已登录 -->
 				<view v-if="vuex_user.hasLogin" class="u-flex" @click="openPage('my/user/user')">
-					<view class="u-m-r-20"><u-avatar :src="list.model.user.userFace" mode="circle" size="120"></u-avatar></view>
+					<view class="u-m-r-20"><u-avatar :src="list.model.user.avatar" mode="circle" size="120"></u-avatar></view>
 					<view class="u-flex-1">
-						<view class="u-font-lg">{{ list.model.user.nickName }}</view>
+						<view class="u-font-lg">{{ list.model.user.name }}</view>
 						<view class="u-m-t-10">
-							<u-tag v-for="(item, index) in list.model.user.userTag" :key="index" :text="item" mode="plain" type="info" size="mini" class="u-m-r-10" />
+							<u-tag v-for="(item, index) in list.model.user.tag" :key="index" :text="item" mode="plain" type="info" size="mini" class="u-m-r-10" />
 						</view>
 					</view>
 					<view><u-icon name="arrow-right" color="#969799" size="28"></u-icon></view>
@@ -151,12 +151,12 @@ export default {
 				borderBottom: false,
 				model: {
 					user: {
+						/* 名称 */
+						name: '',
 						/* 图像 */
-						userFace: '',
-						/* 昵称 */
-						nickName: '',
+						avatar: '',
 						/* 标签 */
-						userTag: ['钻石会员', '达人']
+						tag: ['钻石会员', '达人']
 					},
 					trace: {
 						/* 商品关注 */
@@ -195,41 +195,26 @@ export default {
 		// 提示
 		tip() {
 			return this.$u.toast('暂未开通');
-		},
-		test() {
-			var reqData = {
-				action: 'login',
-				params: {
-					user: 'test',
-					passsword: ''
-				}
-			};
-			uniCloud
-				.callFunction({
-					name: 'account',
-					data: reqData
-				})
-				.then(
-					res => {
-						console.log(res);
-						let ret = res.result;
-						if (ret.code == 1) {
-							return this.$u.toast('成功');
-						} else {
-							return this.$u.toast(ret.msg);
-						}
-					},
-					err => {
-						console.log(err);
-						return this.$u.toast('出错，请稍后再试');
-					}
-				);
 		}
 	},
 	onLoad() {
 		if (this.vuex_user.hasLogin) {
-			this.list.model.user.nickName = this.vuex_user.userName;
-			this.list.model.user.userFace = this.vuex_user.userFace;
+			let params = {};
+			params.token = this.vuex_token;
+			api.getUser(params)
+				.then(res => {
+					console.log(res);
+					if (res.code == 1) {
+						this.list.model.user.name = res.data.userName
+						this.list.model.user.avatar = res.data.avatar
+					} else {
+						return this.$u.toast(res.msg);
+					}
+				})
+				.catch(err => {
+					console.log(err);
+					return this.$u.toast('出错，请稍后再试');
+				});
 		}
 	}
 };

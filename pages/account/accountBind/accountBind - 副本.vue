@@ -18,6 +18,40 @@
 						<u-cell-item v-if="list.model.mobile != ''" title="手机号" :value="list.model.mobile" @click="mobileAction" :border-bottom="borderBottom"></u-cell-item>
 						<u-cell-item v-if="list.model.email == ''" title="邮箱" value="未绑定" @click="openPage('bindEmail/bindEmail')" :border-bottom="borderBottom"></u-cell-item>
 						<u-cell-item v-if="list.model.email != ''" title="邮箱" :value="list.model.email" @click="emailAction" :border-bottom="borderBottom"></u-cell-item>
+						<u-cell-item
+							v-if="list.model.weixin == ''"
+							title="微信账号"
+							value="未绑定"
+							@click="openPage('bindWeixin/bindWeixin')"
+							:border-bottom="borderBottom"
+						></u-cell-item>
+						<u-cell-item v-if="list.model.weixin != ''" title="微信账号" :value="list.model.weixin" @click="weixinAction" :border-bottom="borderBottom"></u-cell-item>
+						<u-cell-item
+							v-if="list.model.weibo == ''"
+							title="微博账号"
+							value="未绑定"
+							@click="openPage('bindWeibo/bindWeibo')"
+							:border-bottom="borderBottom"
+						></u-cell-item>
+						<u-cell-item v-if="list.model.weibo != ''" title="微博账号" :value="list.model.weibo" @click="weiboAction" :border-bottom="borderBottom"></u-cell-item>
+						<u-cell-item v-if="list.model.qq == ''" title="QQ 账号" value="未绑定" @click="openPage('bindQq/bindQq')" :border-bottom="borderBottom"></u-cell-item>
+						<u-cell-item v-if="list.model.qq != ''" title="QQ 账号" :value="list.model.qq" @click="qqAction" :border-bottom="borderBottom"></u-cell-item>
+						<u-cell-item
+							v-if="list.model.taobao == ''"
+							title="淘宝账号"
+							value="未绑定"
+							@click="openPage('bindTaobao/bindTaobao')"
+							:border-bottom="borderBottom"
+						></u-cell-item>
+						<u-cell-item v-if="list.model.taobao != ''" title="淘宝账号" :value="list.model.taobao" @click="taobaoAction" :border-bottom="borderBottom"></u-cell-item>
+						<u-cell-item
+							v-if="list.model.alipay == ''"
+							title="支付宝账号"
+							value="未绑定"
+							@click="openPage('bindAlipay/bindAlipay')"
+							:border-bottom="borderBottom"
+						></u-cell-item>
+						<u-cell-item v-if="list.model.alipay != ''" title="支付宝账号" :value="list.model.alipay" @click="alipayAction" :border-bottom="borderBottom"></u-cell-item>
 					</view>
 				</u-cell-group>
 				<u-action-sheet v-model="select.mobile.show" :list="select.mobile.list" :tips="select.mobile.tips" @click="mobileClick"></u-action-sheet>

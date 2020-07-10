@@ -4,23 +4,21 @@
 			<view class="page-title">{{ title }}</view>
 		</view>
 		<view class="page-body">
-		<view class="form-box">
-			<u-form :model="model" ref="uForm" :errorType="form.errorType">
-				<u-form-item class="form-item" label="邮箱" prop="email" :label-position="form.labelPosition">
-					<u-input v-model="model.email" placeholder="您的常用邮箱" type="text" />
-				</u-form-item>
-				<u-form-item class="form-item" label="邮件验证码" prop="verifyCode" :label-position="form.labelPosition">
-					<u-input v-model="model.verifyCode" placeholder="请输入验证码" type="number" />
-					<u-button slot="right" type="success" size="mini" @click="getCode">{{ codeTips }}</u-button>
-				</u-form-item>
-			</u-form>
+			<view class="form-box">
+				<u-form :model="model" ref="uForm" label-position="top">
+					<u-form-item class="form-item" label="邮箱" prop="email"><u-input v-model="model.email" placeholder="您的常用邮箱" type="text" /></u-form-item>
+					<u-form-item class="form-item" label="邮件验证码" prop="verifyCode">
+						<u-input v-model="model.verifyCode" placeholder="请输入验证码" type="number" />
+						<u-button slot="right" type="success" size="mini" @click="getCode">{{ codeTips }}</u-button>
+					</u-form-item>
+				</u-form>
 
-			<u-verification-code seconds="60" ref="uCode" @change="codeChange"></u-verification-code>
+				<u-verification-code seconds="60" ref="uCode" @change="codeChange"></u-verification-code>
 
-			<u-gap height="40"></u-gap>
+				<u-gap height="40"></u-gap>
 
-			<u-button type="primary" @click="submit">确认绑定</u-button>
-		</view>
+				<u-button :disabled="form.button.loading" type="primary" @click="submit">确认绑定</u-button>
+			</view>
 
 			<u-gap height="60"></u-gap>
 		</view>
@@ -28,6 +26,8 @@
 </template>
 
 <script>
+var api = require('@/common/js/account.api.js');
+
 export default {
 	data() {
 		return {
@@ -35,8 +35,9 @@ export default {
 			desc: '',
 			codeTips: '',
 			form: {
-				errorType: ['message'],
-				labelPosition: 'top'
+				button: {
+					loading: false
+				}
 			},
 			model: {
 				/* 邮箱 */
@@ -88,7 +89,24 @@ export default {
 		submit() {
 			this.$refs.uForm.validate(valid => {
 				if (valid) {
-					return this.$u.toast('验证通过');
+					this.form.button.loading = true;
+					let params = this.model;
+					params.token = this.vuex_token;
+					api.bindEmail(params)
+						.then(res => {
+							this.form.button.loading = false;
+							console.log(res);
+							if (res.code == 1) {
+								return this.$u.toast('绑定成功');
+							} else {
+								return this.$u.toast(res.msg);
+							}
+						})
+						.catch(err => {
+							this.form.button.loading = false;
+							console.log(err);
+							return this.$u.toast('出错，请稍后再试');
+						});
 				} else {
 					console.log('验证失败');
 				}

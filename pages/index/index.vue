@@ -19,7 +19,9 @@
 		</block>
 
 		<!-- 页面主体 -->
-		<view><u-empty text="首页" mode="page"></u-empty></view>
+		<view class="u-m-t-80">
+			<u-empty text="首页" mode="page"></u-empty>
+		</view>
 	</qs-page>
 </template>
 

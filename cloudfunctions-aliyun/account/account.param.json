@@ -1,9 +1,9 @@
 // 本文件中的json内容将在云函数【上传并运行】时作为参数传给云函数。
 
 {
-	"action": "update-user",
+	"action": "get-account",
 	"params": {
-		"id": "5f054d70e9f0440001992509",
+		"id": "5f054fa6e03eac00013a5bea",
 		"model": {
 			"sex": "男",
 			"age": "36"
@@ -19,6 +19,6 @@
 		"password": "888888q",
 		"email": "dawuhan09@163.com",
 		"mobile": "13006359352",
-		"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1ZjA1NGQ3MGU5ZjA0NDAwMDE5OTI1MDkiLCJjbGllbnRJZCI6IjZmYmEzODQ3ZGQxMTJiMTYxNzEwNDJhMjQ0ODVjNmE4IiwiaWF0IjoxNTk0MTgzMDI0LCJleHAiOjE1OTQxOTAyMjR9.RQh36ctSHJj7fe9ZsvG2k4y0xRKjG4sZTROufTeccGA"
+		"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1ZjA1NGZhNmUwM2VhYzAwMDEzYTViZWEiLCJjbGllbnRJZCI6IjE4OTM5MDJkNmFlOTBiZDliMjk4NDFhMmU2YmZhODMzIiwiaWF0IjoxNTk0MzU0ODAwLCJleHAiOjE1OTQzNjIwMDB9.F1TcCdfpx4PBC7lW7dVPrWWRzW214by6ww31XGTCfVM"
 	}
 }

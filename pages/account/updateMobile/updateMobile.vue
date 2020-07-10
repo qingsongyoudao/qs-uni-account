@@ -4,33 +4,35 @@
 			<view class="page-title">{{ title }}</view>
 		</view>
 		<view class="page-body">
-		<view class="form-box">
-			<u-form :model="model" ref="uForm" :errorType="form.errorType">
-				<u-form-item class="form-item" label="当前手机号" prop="currentMobile" :label-position="form.labelPosition">
-					<u-input :disabled="true" v-model="model.currentMobile" type="text" />
-				</u-form-item>
-				<u-form-item class="form-item" label="新手机号" prop="newMobile" :label-position="form.labelPosition">
-					<u-input v-model="model.newMobile" placeholder="请输入新手机号" type="text" />
-				</u-form-item>
-				<u-form-item class="form-item" label="短信验证码" prop="verifyCode" :label-position="form.labelPosition">
-					<u-input v-model="model.verifyCode" placeholder="请输入验证码" type="number" />
-					<u-button slot="right" type="success" size="mini" @click="getCode">{{ codeTips }}</u-button>
-				</u-form-item>
-			</u-form>
-		
-			<u-verification-code seconds="60" ref="uCode" @change="codeChange"></u-verification-code>
-		
-			<u-gap height="40"></u-gap>
-		
-			<u-button type="primary" @click="submit">确认换绑</u-button>
-		</view>
-		
+			<view class="form-box">
+				<u-form :model="model" ref="uForm" label-position="top">
+					<u-form-item class="form-item" label="当前手机号" prop="currentMobile">
+						<u-input :disabled="true" v-model="model.currentMobile" type="text" />
+					</u-form-item>
+					<u-form-item class="form-item" label="新手机号" prop="newMobile">
+						<u-input v-model="model.newMobile" placeholder="请输入新手机号" type="text" />
+					</u-form-item>
+					<u-form-item class="form-item" label="短信验证码" prop="verifyCode">
+						<u-input v-model="model.verifyCode" placeholder="请输入验证码" type="number" />
+						<u-button slot="right" type="success" size="mini" @click="getCode">{{ codeTips }}</u-button>
+					</u-form-item>
+				</u-form>
+
+				<u-verification-code seconds="60" ref="uCode" @change="codeChange"></u-verification-code>
+
+				<u-gap height="40"></u-gap>
+
+				<u-button :disabled="form.button.loading" type="primary" @click="submit">确认换绑</u-button>
+			</view>
+
 			<u-gap height="60"></u-gap>
 		</view>
 	</view>
 </template>
 
 <script>
+var api = require('@/common/js/account.api.js');
+
 export default {
 	data() {
 		return {
@@ -38,12 +40,13 @@ export default {
 			desc: '',
 			codeTips: '',
 			form: {
-				errorType: ['message'],
-				labelPosition: 'top'
+				button: {
+					loading: false
+				}
 			},
 			model: {
 				/* 当前手机号 */
-				currentMobile: '13006359351',
+				currentMobile: '',
 				/* 新手机号 */
 				newMobile: '',
 				/* 验证码 */
@@ -93,7 +96,24 @@ export default {
 		submit() {
 			this.$refs.uForm.validate(valid => {
 				if (valid) {
-					return this.$u.toast('验证通过');
+					this.form.button.loading = true;
+					let params = this.model;
+					params.token = this.vuex_token;
+					api.updateMobile(params)
+						.then(res => {
+							this.form.button.loading = false;
+							console.log(res);
+							if (res.code == 1) {
+								return this.$u.toast('换绑成功');
+							} else {
+								return this.$u.toast(res.msg);
+							}
+						})
+						.catch(err => {
+							this.form.button.loading = false;
+							console.log(err);
+							return this.$u.toast('出错，请稍后再试');
+						});
 				} else {
 					console.log('验证失败');
 				}
@@ -124,6 +144,25 @@ export default {
 	},
 	onReady() {
 		this.$refs.uForm.setRules(this.rules);
+	},
+	onLoad() {
+		if (this.vuex_user.hasLogin) {
+			let params = {};
+			params.token = this.vuex_token;
+			api.getAccount(params)
+				.then(res => {
+					console.log(res);
+					if (res.code == 1) {
+						this.model.currentMobile = res.data.mobile;
+					} else {
+						return this.$u.toast(res.msg);
+					}
+				})
+				.catch(err => {
+					console.log(err);
+					return this.$u.toast('出错，请稍后再试');
+				});
+		}
 	}
 };
 </script>

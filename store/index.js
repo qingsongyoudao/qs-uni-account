@@ -32,8 +32,8 @@ const store = new Vuex.Store({
 	state: {
 		// 如果上面从本地获取的lifeData对象下有对应的属性，就赋值给state中对应的变量
 		// 加上vuex_前缀，是防止变量名冲突，也让人一目了然
-		vuex_user: lifeData.vuex_user ? lifeData.vuex_user : {forcedLogin: false, hasLogin: false, id: '', userName: '', userFace: ''},
-		vuex_token: lifeData.vuex_token ? lifeData.vuex_token : {accessToken: '', refreshToken: ''},
+		vuex_user: lifeData.vuex_user ? lifeData.vuex_user : {forcedLogin: false, hasLogin: false, id: '', name: '', avatar: '', role: []},
+		vuex_token: lifeData.vuex_token ? lifeData.vuex_token : '',
 		// 如果vuex_version无需保存到本地永久存储，无需lifeData.vuex_version方式
 		vuex_version: '1.0.0'
 	},

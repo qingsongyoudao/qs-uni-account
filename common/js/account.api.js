@@ -209,5 +209,37 @@ module.exports = {
 				console.log(err)
 			})
 		})
+	},
+	// token
+	checkToken(params) {
+		return new Promise((resolve, reject) => {
+			this.accountCloud('check-token', params).then((res) => {
+				console.log(res)
+				resolve(res)
+			}).catch((err) => {
+				console.log(err)
+			})
+		})
+	},
+	// 获取
+	getUser(params) {
+		return new Promise((resolve, reject) => {
+			this.accountCloud('get-user', params).then((res) => {
+				console.log(res)
+				resolve(res)
+			}).catch((err) => {
+				console.log(err)
+			})
+		})
+	},
+	getAccount(params) {
+		return new Promise((resolve, reject) => {
+			this.accountCloud('get-account', params).then((res) => {
+				console.log(res)
+				resolve(res)
+			}).catch((err) => {
+				console.log(err)
+			})
+		})
 	}
 }

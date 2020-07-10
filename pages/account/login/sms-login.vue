@@ -106,7 +106,7 @@ export default {
 							if (res.code == 1) {
 								this.$u.vuex('vuex_user.hasLogin', true);
 								this.$u.vuex('vuex_user.id', res.data.uid);
-								this.$u.vuex('vuex_token.accessToken', res.data.token);
+								this.$u.vuex('vuex_token', res.data.token);
 								uni.navigateBack();
 								return this.$u.toast('登录成功');
 							} else {
