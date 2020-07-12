@@ -1,0 +1,23 @@
+{
+  "name": "qs-uni-account",
+  "version": "1.0.0",
+  "description": "基于`uView UI`框架开发的`uni-app`账号模块，跨平台，可发布到 iOS、Android、H5、以及各种小程序（微信/支付宝/百度/头条/QQ/钉钉/淘宝）、快应用等多个平台。",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qingsongyoudao/qs-uni-account.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qingsongyoudao/qs-uni-account/issues"
+  },
+  "homepage": "https://github.com/qingsongyoudao/qs-uni-account#readme",
+  "dependencies": {
+    "uni-simple-router": "^1.5.5"
+  }
+}

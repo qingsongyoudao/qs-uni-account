@@ -29,10 +29,31 @@
 		"path": "pages/account/login/login",
 		"style": {}
 	}, {
+		"path": "pages/account/login/pwd-login",
+		"style": {}
+	}, {
+		"path": "pages/account/login/sms-login",
+		"style": {}
+	}, {
 		"path": "pages/account/register/register",
 		"style": {}
 	}, {
+		"path": "pages/account/register/userName-register",
+		"style": {}
+	}, {
+		"path": "pages/account/register/email-register",
+		"style": {}
+	}, {
+		"path": "pages/account/register/mobile-register",
+		"style": {}
+	}, {
 		"path": "pages/account/findPassword/findPassword",
+		"style": {}
+	}, {
+		"path": "pages/account/findPassword/email-findPassword",
+		"style": {}
+	}, {
+		"path": "pages/account/findPassword/mobile-findPassword",
 		"style": {}
 	}, {
 		"path": "pages/account/safetyCenter/safetyCenter",
@@ -50,46 +71,28 @@
 		"path": "pages/account/updateUserName/updateUserName",
 		"style": {}
 	}, {
-		"path": "pages/account/login/pwd-login",
-		"style": {}
-	}, {
-		"path": "pages/account/login/sms-login",
-		"style": {}
-	}, {
-		"path": "pages/account/register/email-register",
-		"style": {}
-	}, {
-		"path": "pages/account/register/mobile-register",
-		"style": {}
-	}, {
-		"path": "pages/account/findPassword/email-findPassword",
-		"style": {}
-	}, {
-		"path": "pages/account/findPassword/mobile-findPassword",
-		"style": {}
-	}, {
-		"path": "pages/account/accountBind/accountBind",
-		"style": {}
-	}, {
-		"path": "pages/account/accountAppeal/accountAppeal",
-		"style": {}
-	}, {
 		"path": "pages/account/setSafetyQuestion/setSafetyQuestion",
 		"style": {}
 	}, {
 		"path": "pages/account/updateSafetyQuestion/updateSafetyQuestion",
 		"style": {}
 	}, {
+		"path": "pages/account/accountAppeal/accountAppeal",
+		"style": {}
+	}, {
 		"path": "pages/account/accountDestroy/accountDestroy",
+		"style": {}
+	}, {
+		"path": "pages/account/accountBind/accountBind",
+		"style": {}
+	}, {
+		"path": "pages/account/bindMobile/bindMobile",
 		"style": {}
 	}, {
 		"path": "pages/account/updateMobile/updateMobile",
 		"style": {}
 	}, {
 		"path": "pages/account/unbindMobile/unbindMobile",
-		"style": {}
-	}, {
-		"path": "pages/account/bindMobile/bindMobile",
 		"style": {}
 	}, {
 		"path": "pages/account/bindEmail/bindEmail",
@@ -145,11 +148,13 @@
 	}, {
 		"path": "pages/account/unbindAlipay/unbindAlipay",
 		"style": {}
-	}    ,{
-            "path" : "pages/account/register/userName-register",
-            "style" : {}
-        }
-    ],
+	}, {
+		"path": "pages/home/index",
+		"style": {}
+	}, {
+		"path": "pages/home/list",
+		"style": {}
+	}],
 	"globalStyle": {
 		"pageOrientation": "portrait",
 		"navigationBarTextStyle": "black",
