@@ -7,7 +7,7 @@ exports.main = async (event, context) => {
 	console.log('event : ' + event)
 
 	// 操作
-	let action = event.action
+	let method = event.method
 	// 参数
 	let params = event.params
 	// 返回
@@ -15,7 +15,7 @@ exports.main = async (event, context) => {
 	// payload
 	let payload = {}
 
-	switch (action) {
+	switch (method) {
 		case 'register':
 			res = await qsAccount.registerByUserName(params);
 			break;

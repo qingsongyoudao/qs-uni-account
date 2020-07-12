@@ -1,245 +1,163 @@
-module.exports = {
-	// --- 云函数 ---
-	// 账户云
-	accountCloud: function(action, params) {
-		return new Promise((resolve, reject) => {
-			uniCloud.callFunction({
-				name: 'account',
-				data: {
-					action: action,
-					params: params
-				},
-				success(res) {
-					resolve(res.result)
-				},
-				fail(err) {
-					console.error(err)
-					reject(new Error('出错，请稍后再试'))
-				}
-			})
-		})
-	},
+import request from '@/common/js/request.js'
+var url = 'account'
 
-	// --- 函数 ---
+module.exports = {
 	// 注册
-	register(params) {
-		return new Promise((resolve, reject) => {
-			this.accountCloud('register', params).then((res) => {
-				console.log(res)
-				resolve(res)
-			}).catch((err) => {
-				console.log(err)
-			})
+	register(data) {
+		return request({
+			url,
+			method: 'register',
+			data
 		})
 	},
-	registerByEmail(params) {
-		return new Promise((resolve, reject) => {
-			this.accountCloud('register-email', params).then((res) => {
-				console.log(res)
-				resolve(res)
-			}).catch((err) => {
-				console.log(err)
-			})
+	registerByEmail(data) {
+		return request({
+			url,
+			method: 'register-email',
+			data
 		})
 	},
-	registerByMobile(params) {
-		return new Promise((resolve, reject) => {
-			this.accountCloud('register-mobile', params).then((res) => {
-				console.log(res)
-				resolve(res)
-			}).catch((err) => {
-				console.log(err)
-			})
+	registerByMobile(data) {
+		return request({
+			url,
+			method: 'register-mobile',
+			data
 		})
 	},
 	// 登录
-	login(params) {
-		return new Promise((resolve, reject) => {
-			this.accountCloud('login', params).then((res) => {
-				console.log(res)
-				resolve(res)
-			}).catch((err) => {
-				console.log(err)
-			})
+	login(data) {
+		return request({
+			url,
+			method: 'login',
+			data
 		})
 	},
-	loginBySms(params) {
-		return new Promise((resolve, reject) => {
-			this.accountCloud('login-sms', params).then((res) => {
-				console.log(res)
-				resolve(res)
-			}).catch((err) => {
-				console.log(err)
-			})
+	loginBySms(data) {
+		return request({
+			url,
+			method: 'login-sms',
+			data
 		})
 	},
 	// 退出
-	logout(params) {
-		return new Promise((resolve, reject) => {
-			this.accountCloud('logout', params).then((res) => {
-				console.log(res)
-				resolve(res)
-			}).catch((err) => {
-				console.log(err)
-			})
+	logout(data) {
+		return request({
+			url,
+			method: 'logout',
+			data
 		})
 	},
 	// 密码
-	setPassword(params) {
-		return new Promise((resolve, reject) => {
-			this.accountCloud('set-password', params).then((res) => {
-				console.log(res)
-				resolve(res)
-			}).catch((err) => {
-				console.log(err)
-			})
+	setPassword(data) {
+		return request({
+			url,
+			method: 'set-password',
+			data
 		})
 	},
-	updatePassword(params) {
-		return new Promise((resolve, reject) => {
-			this.accountCloud('update-password', params).then((res) => {
-				console.log(res)
-				resolve(res)
-			}).catch((err) => {
-				console.log(err)
-			})
+	updatePassword(data) {
+		return request({
+			url,
+			method: 'update-password',
+			data
 		})
 	},
 	// 用户名
-	setUserName(params) {
-		return new Promise((resolve, reject) => {
-			this.accountCloud('set-userName', params).then((res) => {
-				console.log(res)
-				resolve(res)
-			}).catch((err) => {
-				console.log(err)
-			})
+	setUserName(data) {
+		return request({
+			url,
+			method: 'set-userName',
+			data
 		})
 	},
-	updateUserName(params) {
-		return new Promise((resolve, reject) => {
-			this.accountCloud('update-userName', params).then((res) => {
-				console.log(res)
-				resolve(res)
-			}).catch((err) => {
-				console.log(err)
-			})
+	updateUserName(data) {
+		return request({
+			url,
+			method: 'update-userName',
+			data
 		})
 	},
 	// 邮箱
 	bindEmail(params) {
-		return new Promise((resolve, reject) => {
-			this.accountCloud('bind-email', params).then((res) => {
-				console.log(res)
-				resolve(res)
-			}).catch((err) => {
-				console.log(err)
-			})
+		return request({
+			url,
+			method: 'bind-email',
+			data
 		})
 	},
-	updateEmail(params) {
-		return new Promise((resolve, reject) => {
-			this.accountCloud('update-email', params).then((res) => {
-				console.log(res)
-				resolve(res)
-			}).catch((err) => {
-				console.log(err)
-			})
+	updateEmail(data) {
+		return request({
+			url,
+			method: 'update-email',
+			data
 		})
 	},
-	unbindEmail(params) {
-		return new Promise((resolve, reject) => {
-			this.accountCloud('unbind-email', params).then((res) => {
-				console.log(res)
-				resolve(res)
-			}).catch((err) => {
-				console.log(err)
-			})
+	unbindEmail(data) {
+		return request({
+			url,
+			method: 'unbind-email',
+			data
 		})
 	},
 	// 手机号
-	bindMobile(params) {
-		return new Promise((resolve, reject) => {
-			this.accountCloud('bind-mobile', params).then((res) => {
-				console.log(res)
-				resolve(res)
-			}).catch((err) => {
-				console.log(err)
-			})
+	bindMobile(data) {
+		return request({
+			url,
+			method: 'bind-mobile',
+			data
 		})
 	},
-	updateMobile(params) {
-		return new Promise((resolve, reject) => {
-			this.accountCloud('update-mobile', params).then((res) => {
-				console.log(res)
-				resolve(res)
-			}).catch((err) => {
-				console.log(err)
-			})
+	updateMobile(data) {
+		return request({
+			url,
+			method: 'update-mobile',
+			data
 		})
 	},
-	unbindMobile(params) {
-		return new Promise((resolve, reject) => {
-			this.accountCloud('unbind-mobile', params).then((res) => {
-				console.log(res)
-				resolve(res)
-			}).catch((err) => {
-				console.log(err)
-			})
+	unbindMobile(data) {
+		return request({
+			url,
+			method: 'unbind-mobile',
+			data
 		})
 	},
 	// 图像
-	setAvatar(params) {
-		return new Promise((resolve, reject) => {
-			this.accountCloud('set-avatar', params).then((res) => {
-				console.log(res)
-				resolve(res)
-			}).catch((err) => {
-				console.log(err)
-			})
+	setAvatar(data) {
+		return request({
+			url,
+			method: 'set-avatar',
+			data
 		})
 	},
 	// 用户
-	updateUser(params) {
-		return new Promise((resolve, reject) => {
-			this.accountCloud('update-user', params).then((res) => {
-				console.log(res)
-				resolve(res)
-			}).catch((err) => {
-				console.log(err)
-			})
+	updateUser(data) {
+		return request({
+			url,
+			method: 'update-user',
+			data
 		})
 	},
 	// token
-	checkToken(params) {
-		return new Promise((resolve, reject) => {
-			this.accountCloud('check-token', params).then((res) => {
-				console.log(res)
-				resolve(res)
-			}).catch((err) => {
-				console.log(err)
-			})
+	checkToken(data) {
+		return request({
+			url,
+			method: 'check-token',
+			data
 		})
 	},
 	// 获取
-	getUser(params) {
-		return new Promise((resolve, reject) => {
-			this.accountCloud('get-user', params).then((res) => {
-				console.log(res)
-				resolve(res)
-			}).catch((err) => {
-				console.log(err)
-			})
+	getUser(data) {
+		return request({
+			url,
+			method: 'get-user',
+			data
 		})
 	},
-	getAccount(params) {
-		return new Promise((resolve, reject) => {
-			this.accountCloud('get-account', params).then((res) => {
-				console.log(res)
-				resolve(res)
-			}).catch((err) => {
-				console.log(err)
-			})
+	getAccount(data) {
+		return request({
+			url,
+			method: 'get-account',
+			data
 		})
 	}
 }
