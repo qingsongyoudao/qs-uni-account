@@ -4,11 +4,13 @@ const home = [{
 	},
 	{
 		path: '/pages/my/setting/setting',
-		name: 'my_setting'
+		name: 'my_setting',
+		forceLogin: true
 	},
 	{
 		path: '/pages/my/user/user',
-		name: 'my_user'
+		name: 'my_user',
+		forceLogin: true
 	}
 ]
 

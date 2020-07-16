@@ -28,67 +28,83 @@ const account = [{
 	},
 	{
 		path: '/pages/account/safetyCenter/safetyCenter',
-		name: 'account_safetyCenter'
+		name: 'account_safetyCenter',
+		forceLogin: true
 	},
 	{
 		path: '/pages/account/setPassword/setPassword',
-		name: 'account_password_set'
+		name: 'account_password_set',
+		forceLogin: true
 	},
 	{
 		path: '/pages/account/updatePassword/updatePassword',
-		name: 'account_password_update'
+		name: 'account_password_update',
+		forceLogin: true
 	},
 	{
 		path: '/pages/account/setUserName/setUserName',
-		name: 'account_userName_set'
+		name: 'account_userName_set',
+		forceLogin: true
 	},
 	{
 		path: '/pages/account/updateUserName/updateUserName',
-		name: 'account_userName_update'
+		name: 'account_userName_update',
+		forceLogin: true
 	},
 	{
 		path: '/pages/account/setSafetyQuestion/setSafetyQuestion',
-		name: 'account_safetyQuestion_set'
+		name: 'account_safetyQuestion_set',
+		forceLogin: true
 	},
 	{
 		path: '/pages/account/updateSafetyQuestion/updateSafetyQuestion',
-		name: 'account_safetyQuestion_update'
+		name: 'account_safetyQuestion_update',
+		forceLogin: true
 	},
 	{
 		path: '/pages/account/accountAppeal/accountAppeal',
-		name: 'account_appeal'
+		name: 'account_appeal',
+		forceLogin: true
 	},
 	{
 		path: '/pages/account/accountDestroy/accountDestroy',
-		name: 'account_destroy'
+		name: 'account_destroy',
+		forceLogin: true
 	},
 	{
 		path: '/pages/account/accountBind/accountBind',
-		name: 'account_bind'
+		name: 'account_bind',
+		forceLogin: true
 	},
 	{
 		path: '/pages/account/bindMobile/bindMobile',
-		name: 'account_mobile_bind'
+		name: 'account_mobile_bind',
+		forceLogin: true
 	},
 	{
 		path: '/pages/account/updateMobile/updateMobile',
-		name: 'account_mobile_update'
+		name: 'account_mobile_update',
+		forceLogin: true
 	},
 	{
 		path: '/pages/account/unbindMobile/unbindMobile',
-		name: 'account_mobile_unbind'
+		name: 'account_mobile_unbind',
+		forceLogin: true
 	},
 	{
 		path: '/pages/account/bindEmail/bindEmail',
-		name: 'account_email_bind'
+		name: 'account_email_bind',
+		forceLogin: true
 	},
 	{
 		path: '/pages/account/updateEmail/updateEmail',
-		name: 'account_email_update'
+		name: 'account_email_update',
+		forceLogin: true
 	},
 	{
 		path: '/pages/account/unbindEmail/unbindEmail',
-		name: 'account_email_unbind'
+		name: 'account_email_unbind',
+		forceLogin: true
 	}
 ]
 

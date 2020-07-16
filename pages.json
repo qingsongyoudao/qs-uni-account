@@ -26,6 +26,9 @@
 		"path": "pages/my/setting/setting",
 		"style": {}
 	}, {
+		"path": "pages/account/logout/logout",
+		"style": {}
+	}, {
 		"path": "pages/account/login/login",
 		"style": {}
 	}, {

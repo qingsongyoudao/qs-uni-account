@@ -2,7 +2,8 @@ import modules from './modules'
 import Vue from 'vue'
 import Router from 'uni-simple-router'
 import {
-	getToken
+	getForceLogin,
+	getHasLogin
 } from '@/common/js/util.js'
 
 Vue.use(Router)
@@ -20,24 +21,36 @@ const LOGIN_PAGE_NAME = ['account_login_pwd', 'account_login_sms']
 router.beforeEach((to, from, next) => {
 	// LoadingBar.start()
 	//console.log(to)
-	if (to.name === '') { // 页面不存在
+
+	// 要跳转的页面，页面不存在
+	if (to.name === '') {
 		next({
 			name: 'index'
 		})
 	}
-	const token = getToken()
-	if (!token && LOGIN_PAGE_NAME.indexOf(to.name) === -1) { // 未登录，要跳转的页面不是登录页
+
+	// 需要登录
+	const forceLogin = getForceLogin(to)
+	// 已经登录
+	const hasLogin = getHasLogin()
+
+	//console.log(forceLogin)
+	//console.log(hasLogin)
+
+	if (forceLogin && !hasLogin && LOGIN_PAGE_NAME.indexOf(to.name) === -1) { // 需要登录，未登录，要跳转的页面，不是登录页
+		//console.log('需要登录，未登录，要跳转的页面，不是登录页')
+		//return
 		next({
 			name: LOGIN_PAGE_NAME[0] // 跳转到登录页
 		})
-	} else if (!token && LOGIN_PAGE_NAME.indexOf(to.name) !== -1) { // 未登录，要跳转的页面是登录页
-		// 跳转
-		next()
-	} else if (token && LOGIN_PAGE_NAME.indexOf(to.name) !== -1) { // 已登录，要跳转的页面是登录页
+	} else if (hasLogin && LOGIN_PAGE_NAME.indexOf(to.name) !== -1) { // 已登录，要跳转的页面，是登录页
+		//console.log('已登录，要跳转的页面，是登录页')
 		next({
-			name: 'index'
+			name: 'index' // 跳转到首页
 		})
 	} else { // 其它
+		//console.log('正常')
+		//return
 		next()
 	}
 })

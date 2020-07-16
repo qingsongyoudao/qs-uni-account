@@ -81,12 +81,12 @@ export default {
 			api.logout(params)
 				.then(res => {
 					console.log(res);
-					this.$u.vuex('vuex_user.hasLogin', false);
+					this.$u.vuex('vuex_user.logined', false);
 					this.$u.vuex('vuex_user.id', '');
 					this.$u.vuex('vuex_token', '');
 					return this.$u.toast('退出成功');
 					if (res.code == 1) {
-						this.$u.vuex('vuex_user.hasLogin', false);
+						this.$u.vuex('vuex_user.logined', false);
 						this.$u.vuex('vuex_user.id', '');
 						this.$u.vuex('vuex_token', '');
 						return this.$u.toast('退出成功');
@@ -99,11 +99,6 @@ export default {
 					return this.$u.toast('出错，请稍后再试');
 				});
 			return;
-		}
-	},
-	onLoad() {
-		if (!this.vuex_user.hasLogin) {
-			this.$u.route('/pages/account/login/pwd-login');
 		}
 	}
 };

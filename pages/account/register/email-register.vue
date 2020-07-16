@@ -149,7 +149,7 @@ export default {
 							this.form.button.loading = false;
 							console.log(res);
 							if (res.code == 1) {
-								this.$u.vuex('vuex_user.hasLogin', true);
+								this.$u.vuex('vuex_user.logined', true);
 								this.$u.vuex('vuex_user.id', res.data.uid);
 								this.$u.vuex('vuex_token', res.data.token);
 								uni.navigateBack();
