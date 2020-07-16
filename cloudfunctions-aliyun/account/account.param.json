@@ -8,6 +8,7 @@
 			"sex": "男",
 			"age": "36"
 		},
+		"verifyCode":"554043",
 		"oldPassword": "888888q",
 		"newPassword": "888888qs",
 		"newUserName": "qingsong",
