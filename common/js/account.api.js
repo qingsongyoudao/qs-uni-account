@@ -47,6 +47,13 @@ module.exports = {
 			data
 		})
 	},
+	emptyToken(data) {
+		return request({
+			url,
+			method: 'empty-token',
+			data
+		})
+	},
 	// 密码
 	setPassword(data) {
 		return request({

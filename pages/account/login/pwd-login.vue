@@ -6,12 +6,8 @@
 		<view class="page-body">
 			<view class="form-box">
 				<u-form :model="model" ref="uForm" label-position="top">
-					<u-form-item class="form-item" label="账号" prop="user">
-						<u-input v-model="model.user" placeholder="请输入手机号/邮箱/用户名" type="text" />
-					</u-form-item>
-					<u-form-item class="form-item" label="密码" prop="password">
-						<u-input v-model="model.password" placeholder="请输入登录密码" type="password" />
-					</u-form-item>
+					<u-form-item class="form-item" label="账号" prop="user"><u-input v-model="model.user" placeholder="请输入手机号/邮箱/用户名" type="text" /></u-form-item>
+					<u-form-item class="form-item" label="密码" prop="password"><u-input v-model="model.password" placeholder="请输入登录密码" type="password" /></u-form-item>
 				</u-form>
 
 				<u-gap height="40"></u-gap>
@@ -24,9 +20,9 @@
 					<view class="u-flex-1 u-text-left" @click="openPage('login/sms-login')">短信登录</view>
 					<view class="u-flex-1 u-text-right" @click="openPage('register/register')">注册</view>
 				</view>
-				
+
 				<u-gap height="40"></u-gap>
-				
+
 				<view class="u-text-center u-tips-color" @click="openPage('findPassword/findPassword')">登录遇到问题，忘记密码了？</view>
 			</view>
 
@@ -103,7 +99,7 @@ export default {
 								this.$u.vuex('vuex_user.logined', true);
 								this.$u.vuex('vuex_user.id', res.data.uid);
 								this.$u.vuex('vuex_token', res.data.token);
-								uni.navigateBack();
+								uni.navigateBack({});
 								return this.$u.toast('登录成功');
 							} else {
 								return this.$u.toast(res.msg);

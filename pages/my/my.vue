@@ -18,13 +18,13 @@
 			<!-- 用户 -->
 			<view class="user-panel-box">
 				<!-- 未登录 -->
-				<view v-if="!vuex_user.hasLogin" class="u-flex" @click="openPage('account/login/pwd-login')">
+				<view v-if="!hasLogin" class="u-flex" @click="openPage('account/login/pwd-login')">
 					<view class="u-m-r-20"><u-avatar size="120"></u-avatar></view>
 					<view class="u-flex-1"><view class="u-font-lg">登录 / 注册</view></view>
 					<view><u-icon name="arrow-right" color="#969799" size="28"></u-icon></view>
 				</view>
 				<!-- 已登录 -->
-				<view v-if="vuex_user.hasLogin" class="u-flex" @click="openPage('my/user/user')">
+				<view v-if="hasLogin" class="u-flex" @click="openPage('my/user/user')">
 					<view class="u-m-r-20"><u-avatar :src="list.model.user.avatar" mode="circle" size="120"></u-avatar></view>
 					<view class="u-flex-1">
 						<view class="u-font-lg">{{ list.model.user.name }}</view>
@@ -132,6 +132,7 @@ import {
 export default {
 	data() {
 		return {
+			hasLogin: false,
 			cells: [
 				{
 					title: '设置',
@@ -201,13 +202,6 @@ export default {
 		}
 	},
 	onLoad() {
-		api.logout({})
-			.then(res => {
-				console.log(res);
-			})
-			.catch(err => {
-				console.log(err);
-			});return;
 		// 已经登录
 		const hasLogin = getHasLogin()
 		if (hasLogin) {
@@ -216,6 +210,7 @@ export default {
 				.then(res => {
 					console.log(res);
 					if (res.code == 1) {
+						this.hasLogin = true;
 						this.list.model.user.name = res.data.userName
 						this.list.model.user.avatar = res.data.avatar
 					} else {

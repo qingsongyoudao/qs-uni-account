@@ -77,7 +77,9 @@ export default {
 		},
 		logout() {
 			let params = {}
+			params.id = this.vuex_user.id;
 			params.token = this.vuex_token;
+			console.log(params)
 			api.logout(params)
 				.then(res => {
 					console.log(res);
@@ -85,20 +87,7 @@ export default {
 					this.$u.vuex('vuex_user.id', '');
 					this.$u.vuex('vuex_token', '');
 					return this.$u.toast('退出成功');
-					if (res.code == 1) {
-						this.$u.vuex('vuex_user.logined', false);
-						this.$u.vuex('vuex_user.id', '');
-						this.$u.vuex('vuex_token', '');
-						return this.$u.toast('退出成功');
-					} else {
-						return this.$u.toast(res.msg);
-					}
-				})
-				.catch(err => {
-					console.log(err);
-					return this.$u.toast('出错，请稍后再试');
 				});
-			return;
 		}
 	}
 };

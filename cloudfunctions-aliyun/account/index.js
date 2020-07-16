@@ -35,7 +35,10 @@ exports.main = async (event, context) => {
 			res = await qsAccount.loginByWeixin(params);
 			break;
 		case 'logout':
-			res = await qsAccount.logout(params.token);
+			res = await qsAccount.logout(params.id, params.token);
+			break;
+		case 'empty-token':
+			res = await qsAccount.emptyToken(params.id);
 			break;
 		case 'set-password':
 			payload = await qsAccount.checkToken(params.token)

@@ -107,7 +107,7 @@ export default {
 								this.$u.vuex('vuex_user.logined', true);
 								this.$u.vuex('vuex_user.id', res.data.uid);
 								this.$u.vuex('vuex_token', res.data.token);
-								uni.navigateBack();
+								uni.navigateBack({});
 								return this.$u.toast('登录成功');
 							} else {
 								return this.$u.toast(res.msg);

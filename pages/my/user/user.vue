@@ -26,6 +26,9 @@
 
 <script>
 var api = require('@/common/js/account.api.js');
+import {
+	getHasLogin
+} from '@/common/js/util.js'
 
 export default {
 	data() {
@@ -55,9 +58,10 @@ export default {
 		};
 	},
 	onLoad() {
-		if (this.vuex_user.hasLogin) {
+		// 已经登录
+		const hasLogin = getHasLogin()
+		if (hasLogin) {
 			let params = {};
-			params.token = this.vuex_token;
 			api.getUser(params)
 				.then(res => {
 					console.log(res);

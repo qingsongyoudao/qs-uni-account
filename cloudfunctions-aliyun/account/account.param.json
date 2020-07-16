@@ -1,9 +1,9 @@
 // 本文件中的json内容将在云函数【上传并运行】时作为参数传给云函数。
 
 {
-	"method": "check-token",
+	"method": "empty-token",
 	"params": {
-		"id": "5f054fa6e03eac00013a5bea",
+		"id": "5f054d70e9f0440001992509",
 		"model": {
 			"sex": "男",
 			"age": "36"
@@ -19,6 +19,6 @@
 		"password": "888888q",
 		"email": "dawuhan09@163.com",
 		"mobile": "13006359352",
-		"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1ZjA4MTY2NjMwNTc4MzAwMDE4YjA0M2UiLCJjbGllbnRJZCI6IjE4OTM5MDJkNmFlOTBiZDliMjk4NDFhMmU2YmZhODMzIiwiaWF0IjoxNTk0ODc1MTQwLCJleHAiOjE1OTQ4ODIzNDB9.Te1YRPmekhDGw6PVYq692fDLP5Vuh-1v8sNY-QebB1s"
+		"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1ZjA1NGQ3MGU5ZjA0NDAwMDE5OTI1MDkiLCJjbGllbnRJZCI6IjE4OTM5MDJkNmFlOTBiZDliMjk4NDFhMmU2YmZhODMzIiwiaWF0IjoxNTk0MzUzNTI2LCJleHAiOjE1OTQzNjA3MjZ9.cBEtxMRyuh6mV9K1Gs9BDJwjNVGnzInW3QdtQEtqU3I"
 	}
 }
