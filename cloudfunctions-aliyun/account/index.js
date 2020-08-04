@@ -1,159 +1,146 @@
 'use strict';
 
-const qsAccount = require('qs-account')
+const uniId = require('uni-id')
 
 exports.main = async (event, context) => {
 	//event为客户端上传的参数
 	console.log('event : ' + event)
 
 	// 操作
-	let method = event.method
+	let action = event.action
 	// 参数
-	let params = event.params
-	// 返回
-	let res = {}
+	let params = event.params || {}
+	// 令牌
+	let token = event.uniIdToken
+
 	// payload
 	let payload = {}
+	let noCheckAction = ['register', 'checkToken', 'encryptPwd', 'login', 'loginByWeixin', 'sendSmsCode',
+		'setVerifyCode', 'loginBySms', 'loginByEmail'
+	]
+	if (noCheckAction.indexOf(action) === -1) {
+		if (!token) {
+			return {
+				code: 403,
+				msg: '缺少token'
+			}
+		}
+		payload = await uniId.checkToken(token)
+		if (payload.code && payload.code > 0) {
+			return payload
+		}
+		params.uid = payload.uid
+	}
 
-	switch (method) {
+	// 返回
+	let res = {}
+
+	switch (action) {
 		case 'register':
-			res = await qsAccount.registerByUserName(params);
+			res = await uniId.registerByUserName(params);
 			break;
-		case 'register-email':
-			res = await qsAccount.registerByEmail(params);
+		case 'registerByEmail':
+			res = await uniId.registerByEmail(params);
 			break;
-		case 'register-mobile':
-			res = await qsAccount.registerByMobile(params);
+		case 'registerByMobile':
+			res = await uniId.registerByMobile(params);
 			break;
 		case 'login':
-			res = await qsAccount.loginByPwd(params);
+			res = await uniId.loginByPwd(params);
 			break;
-		case 'login-sms':
-			res = await qsAccount.loginBySms(params);
-			break;
-		case 'login-weixin':
-			res = await qsAccount.loginByWeixin(params);
+		case 'loginBySms':
+			res = await uniId.loginBySms(params);
 			break;
 		case 'logout':
-			res = await qsAccount.logout(params.id, params.token);
+			res = await uniId.logout(token);
 			break;
-		case 'empty-token':
-			res = await qsAccount.emptyToken(params.id);
+		case 'setPassword':
+			res = await uniId.setPassword(params);
 			break;
-		case 'set-password':
-			payload = await qsAccount.checkToken(params.token)
-			if (payload.code && payload.code > 0) {
-				return payload
+		case 'updatePassword':
+			res = await uniId.updatePassword(params);
+			break;
+		case 'resetPassword':
+			res = await uniId.resetPassword({
+				id: params.id,
+				password: '123456'
+			});
+			break;
+		case 'setUserName':
+			res = await uniId.setUserName(params);
+			break;
+		case 'updateUserName':
+			res = await uniId.updateUserName(params);
+			break;
+		case 'bindEmail':
+			res = await uniId.bindEmail(params);
+			break;
+		case 'updateEmail':
+			res = await uniId.updateEmail(params);
+			break;
+		case 'unbindEmail':
+			res = await uniId.unbindEmail(params);
+			break;
+		case 'bindMobile':
+			res = await uniId.bindMobile(params);
+			break;
+		case 'updateMobile':
+			res = await uniId.updateMobile(params);
+			break;
+		case 'unbindMobile':
+			res = await uniId.unbindMobile(params);
+			break;
+		case 'setAvatar':
+			res = await uniId.setAvatar(params);
+			break;
+		case 'updateAvatar':
+			res = await uniId.updateAvatar(params);
+			break;
+		case 'loginByWeixin':
+			res = await uniId.loginByWeixin(params);
+			break;
+		case 'bindWeixin':
+			res = await uniId.bindWeixin(params);
+			break;
+		case 'unbindWeixin':
+			res = await uniId.unbindWeixin(params);
+			break;
+		case 'loginByAlipay':
+			res = await uniId.loginByAlipay(params);
+			break;
+		case 'bindAlipay':
+			res = await uniId.bindAlipay(params);
+			break;
+		case 'unbindAlipay':
+			res = await uniId.unbindAlipay(params);
+			break;
+		case 'checkToken':
+			const checkTokenRes = await uniId.checkToken(token)
+			res = {
+				code: checkTokenRes.code,
+				msg: checkTokenRes.msg
 			}
-			params.id = payload.uid
-			res = await qsAccount.setPassword(params);
 			break;
-		case 'update-password':
-			payload = await qsAccount.checkToken(params.token)
-			if (payload.code && payload.code > 0) {
-				return payload
-			}
-			params.id = payload.uid
-			res = await qsAccount.updatePassword(params);
+		case 'emptyToken':
+			res = await uniId.emptyToken(params);
 			break;
-		case 'set-userName':
-			payload = await qsAccount.checkToken(params.token)
-			if (payload.code && payload.code > 0) {
-				return payload
-			}
-			params.id = payload.uid
-			res = await qsAccount.setUserName(params);
+		case 'updateUser':
+			res = await uniId.updateUser(params);
 			break;
-		case 'update-userName':
-			payload = await qsAccount.checkToken(params.token)
-			if (payload.code && payload.code > 0) {
-				return payload
-			}
-			params.id = payload.uid
-			res = await qsAccount.updateUserName(params);
+		case 'getAccount':
+			res = await uniId.getAccount(params);
 			break;
-		case 'bind-email':
-			payload = await qsAccount.checkToken(params.token)
-			if (payload.code && payload.code > 0) {
-				return payload
-			}
-			params.id = payload.uid
-			res = await qsAccount.bindEmail(params);
+		case 'getUser':
+			res = await uniId.getUser(params);
 			break;
-		case 'update-email':
-			payload = await qsAccount.checkToken(params.token)
-			if (payload.code && payload.code > 0) {
-				return payload
-			}
-			params.id = payload.uid
-			res = await qsAccount.updateEmail(params);
+		case 'sendSmsCode':
+			res = await uniId.sendSmsCode(params);
 			break;
-		case 'unbind-email':
-			payload = await qsAccount.checkToken(params.token)
-			if (payload.code && payload.code > 0) {
-				return payload
-			}
-			params.id = payload.uid
-			res = await qsAccount.unbindEmail(params);
+		case 'setVerifyCode':
+			res = await uniId.setVerifyCode(params);
 			break;
-		case 'bind-mobile':
-			payload = await qsAccount.checkToken(params.token)
-			if (payload.code && payload.code > 0) {
-				return payload
-			}
-			params.id = payload.uid
-			res = await qsAccount.bindMobile(params);
-			break;
-		case 'update-mobile':
-			payload = await qsAccount.checkToken(params.token)
-			if (payload.code && payload.code > 0) {
-				return payload
-			}
-			params.id = payload.uid
-			res = await qsAccount.updateMobile(params);
-			break;
-		case 'unbind-mobile':
-			payload = await qsAccount.checkToken(params.token)
-			if (payload.code && payload.code > 0) {
-				return payload
-			}
-			params.id = payload.uid
-			res = await qsAccount.unbindMobile(params);
-			break;
-		case 'set-avatar':
-			payload = await qsAccount.checkToken(params.token)
-			if (payload.code && payload.code > 0) {
-				return payload
-			}
-			params.id = payload.uid
-			res = await qsAccount.setAvatar(params);
-			break;
-		case 'update-user':
-			payload = await qsAccount.checkToken(params.token)
-			if (payload.code && payload.code > 0) {
-				return payload
-			}
-			params.id = payload.uid
-			res = await qsAccount.updateUser(params);
-			break;
-		case 'check-token':
-			res = await qsAccount.checkToken(params.token);
-			break;
-		case 'get-account':
-			payload = await qsAccount.checkToken(params.token)
-			if (payload.code && payload.code > 0) {
-				return payload
-			}
-			params.id = payload.uid
-			res = await qsAccount.getAccount(params);
-			break;
-		case 'get-user':
-			payload = await qsAccount.checkToken(params.token)
-			if (payload.code && payload.code > 0) {
-				return payload
-			}
-			params.id = payload.uid
-			res = await qsAccount.getUser(params);
+		case 'verifyCode':
+			res = await uniId.verifyCode(params);
 			break;
 		default:
 			res = {
