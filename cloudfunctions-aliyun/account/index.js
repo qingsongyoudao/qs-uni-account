@@ -36,7 +36,7 @@ exports.main = async (event, context) => {
 	let res = {}
 
 	switch (action) {
-		case 'register':
+		case 'registerByUserName':
 			res = await uniId.registerByUserName(params);
 			break;
 		case 'registerByEmail':
@@ -45,7 +45,7 @@ exports.main = async (event, context) => {
 		case 'registerByMobile':
 			res = await uniId.registerByMobile(params);
 			break;
-		case 'login':
+		case 'loginByPwd':
 			res = await uniId.loginByPwd(params);
 			break;
 		case 'loginBySms':
@@ -90,12 +90,6 @@ exports.main = async (event, context) => {
 		case 'unbindMobile':
 			res = await uniId.unbindMobile(params);
 			break;
-		case 'setAvatar':
-			res = await uniId.setAvatar(params);
-			break;
-		case 'updateAvatar':
-			res = await uniId.updateAvatar(params);
-			break;
 		case 'loginByWeixin':
 			res = await uniId.loginByWeixin(params);
 			break;
@@ -114,15 +108,11 @@ exports.main = async (event, context) => {
 		case 'unbindAlipay':
 			res = await uniId.unbindAlipay(params);
 			break;
-		case 'checkToken':
-			const checkTokenRes = await uniId.checkToken(token)
-			res = {
-				code: checkTokenRes.code,
-				msg: checkTokenRes.msg
-			}
+		case 'setAvatar':
+			res = await uniId.setAvatar(params);
 			break;
-		case 'emptyToken':
-			res = await uniId.emptyToken(params);
+		case 'updateAvatar':
+			res = await uniId.updateAvatar(params);
 			break;
 		case 'updateUser':
 			res = await uniId.updateUser(params);
@@ -141,6 +131,16 @@ exports.main = async (event, context) => {
 			break;
 		case 'verifyCode':
 			res = await uniId.verifyCode(params);
+			break;
+		case 'checkToken':
+			const checkTokenRes = await uniId.checkToken(token)
+			res = {
+				code: checkTokenRes.code,
+				msg: checkTokenRes.msg
+			}
+			break;
+		case 'emptyToken':
+			res = await uniId.emptyToken(params);
 			break;
 		default:
 			res = {

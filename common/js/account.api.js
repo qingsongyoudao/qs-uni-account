@@ -3,54 +3,47 @@ var url = 'account'
 
 module.exports = {
 	// 注册
-	register(data) {
+	registerByUserName(data) {
 		return request({
 			url,
-			method: 'register',
+			action: 'registerByUserName',
 			data
 		})
 	},
 	registerByEmail(data) {
 		return request({
 			url,
-			method: 'register-email',
+			action: 'registerByEmail',
 			data
 		})
 	},
 	registerByMobile(data) {
 		return request({
 			url,
-			method: 'register-mobile',
+			action: 'registerByMobile',
 			data
 		})
 	},
 	// 登录
-	login(data) {
+	loginByPwd(data) {
 		return request({
 			url,
-			method: 'login',
+			action: 'loginByPwd',
 			data
 		})
 	},
 	loginBySms(data) {
 		return request({
 			url,
-			method: 'login-sms',
+			action: 'loginBySms',
 			data
 		})
 	},
-	// 退出
+	// 登出 
 	logout(data) {
 		return request({
 			url,
-			method: 'logout',
-			data
-		})
-	},
-	emptyToken(data) {
-		return request({
-			url,
-			method: 'empty-token',
+			action: 'logout',
 			data
 		})
 	},
@@ -58,14 +51,21 @@ module.exports = {
 	setPassword(data) {
 		return request({
 			url,
-			method: 'set-password',
+			action: 'setPassword',
 			data
 		})
 	},
 	updatePassword(data) {
 		return request({
 			url,
-			method: 'update-password',
+			action: 'updatePassword',
+			data
+		})
+	},
+	resetPassword(data) {
+		return request({
+			url,
+			action: 'resetPassword',
 			data
 		})
 	},
@@ -73,14 +73,14 @@ module.exports = {
 	setUserName(data) {
 		return request({
 			url,
-			method: 'set-userName',
+			action: 'setUserName',
 			data
 		})
 	},
 	updateUserName(data) {
 		return request({
 			url,
-			method: 'update-userName',
+			action: 'updateUserName',
 			data
 		})
 	},
@@ -88,21 +88,21 @@ module.exports = {
 	bindEmail(params) {
 		return request({
 			url,
-			method: 'bind-email',
+			action: 'bindEmail',
 			data
 		})
 	},
 	updateEmail(data) {
 		return request({
 			url,
-			method: 'update-email',
+			action: 'updateEmail',
 			data
 		})
 	},
 	unbindEmail(data) {
 		return request({
 			url,
-			method: 'unbind-email',
+			action: 'unbindEmail',
 			data
 		})
 	},
@@ -110,21 +110,65 @@ module.exports = {
 	bindMobile(data) {
 		return request({
 			url,
-			method: 'bind-mobile',
+			action: 'bindMobile',
 			data
 		})
 	},
 	updateMobile(data) {
 		return request({
 			url,
-			method: 'update-mobile',
+			action: 'updateMobile',
 			data
 		})
 	},
 	unbindMobile(data) {
 		return request({
 			url,
-			method: 'unbind-mobile',
+			action: 'unbindMobile',
+			data
+		})
+	},
+	// 微信
+	loginByWeixin(data) {
+		return request({
+			url,
+			action: 'loginByWeixin',
+			data
+		})
+	},
+	bindWeixin(data) {
+		return request({
+			url,
+			action: 'bindWeixin',
+			data
+		})
+	},
+	unbindWeixin(data) {
+		return request({
+			url,
+			action: 'unbindWeixin',
+			data
+		})
+	},
+	// 支付宝
+	loginByAlipay(data) {
+		return request({
+			url,
+			action: 'loginByAlipay',
+			data
+		})
+	},
+	bindAlipay(data) {
+		return request({
+			url,
+			action: 'bindAlipay',
+			data
+		})
+	},
+	unbindAlipay(data) {
+		return request({
+			url,
+			action: 'unbindAlipay',
 			data
 		})
 	},
@@ -132,15 +176,36 @@ module.exports = {
 	setAvatar(data) {
 		return request({
 			url,
-			method: 'set-avatar',
+			action: 'setAvatar',
 			data
 		})
 	},
-	// 用户
+	updateAvatar(data) {
+		return request({
+			url,
+			action: 'updateAvatar',
+			data
+		})
+	},
+	// 用户信息
 	updateUser(data) {
 		return request({
 			url,
-			method: 'update-user',
+			action: 'updateUser',
+			data
+		})
+	},
+	getUser(data) {
+		return request({
+			url,
+			action: 'getUser',
+			data
+		})
+	},
+	getAccount(data) {
+		return request({
+			url,
+			action: 'getAccount',
 			data
 		})
 	},
@@ -148,22 +213,14 @@ module.exports = {
 	checkToken(data) {
 		return request({
 			url,
-			method: 'check-token',
+			action: 'checkToken',
 			data
 		})
 	},
-	// 获取
-	getUser(data) {
+	emptyToken(data) {
 		return request({
 			url,
-			method: 'get-user',
-			data
-		})
-	},
-	getAccount(data) {
-		return request({
-			url,
-			method: 'get-account',
+			action: 'emptyToken',
 			data
 		})
 	}
